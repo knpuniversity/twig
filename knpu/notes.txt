@@ -1,0 +1,52 @@
+Our Plan
+--------
+
+* macros
+* whitespace control
+* traits
+* escaping
+* common errors and debugging
+* for "condition"
+* named arguments
+* string interpolation {{ "foo #{bar} baz" }}
+
+Online Documentation Summary
+----------------------------
+
+### Intro
+- installation
+- loading via string
+- caching
+
+### Templates
+- intro
+- variables
+- explains foo.bar, foo['bar'], attribute(foo, 'bar')
+- global variables (_self, _context, _charset)
+- setting vars
+- filters
+- functions
+- named arguments
+- control structure / tags
+- comments
+- include
+- inheritance
+    - parent
+- escaping
+    - the different types - html, js, etc
+- macros
+    - importing
+    - default arg values
+- literals - strings, arrays, hashes, true/false, null
+- math
+- logic (and, or, not)
+- comparisons (==)
+- in
+- is 
+- other operators
+    - ..
+    - |
+    - ~
+    - ? :
+- string interpolation {{ "foo #{bar} baz" }}
+- whitespace control

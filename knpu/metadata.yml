@@ -1,0 +1,74 @@
+title:  Twig Templating for Friendly Frontend Devs
+price:  12
+length: 41:18
+summary: |
+    Welcome to Twig! If you're a frontend developer and you're using Twig
+    in your project, then this course is for you! We'll talk about how to
+    use Twig from the ground-up, clearly pointing out it syntax and then
+    graduating to some really neat and advanced tricks. Twig is awesome to
+    work with, so don't just use Twig, master it!
+    
+    We'll learn:
+
+    * The Twig syntaxes: `{{ }}` and `{% %}`
+    * Functions and filters
+    * Debugging with the `dump()` function
+    * Handling arrays and objects
+    * Template Inheritance (`extends` & `block`)
+    * Tests, looping tricks, and shortcut syntaxes
+    * Macros (Twig functions)
+    * Whitespace control, escaping and more!
+    
+    Ok, let's go!
+illustration: twig.png
+priority: 150
+
+chapters:
+    basics:
+        title:      Twig: The Basics
+        is_free:    true
+        length:     6:07
+        activities:
+            - basics_print_variables
+            - basics_loop_variables
+    "functions-filters":
+        title:      "Functions, Filters and Debugging with dump"
+        is_free:    false
+        length:     5:50
+        activities:
+            - functions_length
+            - functions_dump
+            - functions_print_posted_at
+    "objects-and-arrays":
+        title:      "Using Objects and Array Keys"
+        is_free:    false
+        length:     3:26
+        activities:
+            - objects_property_accessor
+    "layout-template-inheritance":
+        title:      "Using a Layout: Template Inheritance"
+        is_free:    false
+        length:     6:01
+        activities:
+            - layout_basic
+            - layout_title_block
+    "including-other-templates":
+        title:      "Including other Templates"
+        is_free:    false
+        length:     2:12
+    "tests-if-statements":
+        title:      'If Statements with "Tests"'
+        is_free:    false
+        length:     2:30
+    "for-loop-inline-if":
+        title:      'The for "loop" and inline "if" Syntax'
+        is_free:    false
+        length:     3:58
+    "mistakes-macros":
+        title:      "Mistakes and Macros"
+        is_free:    false
+        length:     5:17
+    "extra-credit-tricks-escaping":
+        title:      "Extra Credit Tricks and HTML Escaping"
+        is_free:    false
+        length:     5:56
