@@ -15,7 +15,7 @@ class PrintPostedAtSuite extends AssertSuite
         );
 
         $this->assertRegexp('#Y-m-d#', $input,
-            'Make sure to render the date with a "Y-m-d" format.'
+            'It looks like you have the date filter, but the date isn\'t the right format. Make sure you\'re passing "Y-m-d" (with dashes) to the |date filter.'
         );
 
         // Now check that things are in the right spot.
