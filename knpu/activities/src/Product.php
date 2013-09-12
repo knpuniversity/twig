@@ -5,6 +5,8 @@ class Product
     private $name;
     
     private $price;
+
+    private $postedAt;
     
     public function getName()
     {
@@ -24,5 +26,15 @@ class Product
     public function setPrice($price)
     {
         $this->price = $price;
+    }
+
+    public function setPostedAt(\DateTime $posted)
+    {
+        $this->postedAt = $posted;
+    }
+
+    public function getPostedAt()
+    {
+        return $this->postedAt;
     }
 }

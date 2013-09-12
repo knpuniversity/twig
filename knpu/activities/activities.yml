@@ -54,10 +54,10 @@ functions_print_posted_at:
 
 objects_property_accessor:
     question: |
-        Now instead of `name` and `price` variables, you're being passed
-        a `product` variable, which is an object that has `name` and `price`
-        properties on it. Print `name` inside the `h1` tag and `price` inside
-        the `.product-price` div.
+        Now instead of `name`, `price` and `postedAt` variables, you're being passed
+        a `product` variable, which is an object that has `name`, `price` and `postedAt`
+        properties on it. Print `name` inside the `h1` tag, `price` inside
+        the `.product-price` and `postedAt` inside `.posted-at`.
     skeletons: { product.twig: basicProduct.twig }
     worker: twig
     entry_point: product.twig
