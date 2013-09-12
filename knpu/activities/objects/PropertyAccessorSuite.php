@@ -37,4 +37,13 @@ class PropertyAccessorSuite extends AssertSuite
             'It looks like you rendered the price, but did you forget to put it inside the `.price` tag?'
         );
     }
+
+    public function testHasPostedAt()
+    {
+        // Now check that things are in the right spot.
+        $postedAts = $this->getCrawler()->filter('.posted-at');
+
+        $this->assertEquals(1, count($postedAts), 'Did you forget to render the date inside an element with a "posted-at" class?');
+        $this->assertRegexp("/2013-06-05/", $postedAts->text());
+    }
 }
