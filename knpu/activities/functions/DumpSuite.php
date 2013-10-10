@@ -16,8 +16,8 @@ class DumpSuite extends AssertSuite
         // Look for the var_dump output.
         $output = $this->getOutput();
 
-        $this->assertContains("'name'", $output, $err);
-        $this->assertContains("'price'", $output, $err);
-        $this->assertContains("'postedAt'", $output, $err);
+        $this->assertContains('name', $output, $err);
+        $this->assertContains('price', $output, $err);
+        $this->assertContains('postedAt', $output, $err);
     }
 }
