@@ -29,29 +29,29 @@ chapters:
         is_free:    true
         length:     6:07
         activities:
-            - basics_print_variables
-            - basics_loop_variables
+            - { name: basics_print_variables, time: 2:39 }
+            - { name: basics_loop_variables, time: 3:46 }
     "functions-filters":
         title:      "Functions, Filters and Debugging with dump"
         is_free:    false
         length:     5:50
         activities:
-            - functions_length
-            - functions_dump
-            - functions_print_posted_at
+            - { name: functions_length, time: 3:02 }
+            - { name: functions_print_posted_at, time: 4:31 }
+            - { name: functions_dump, time: 5:25 }
     "objects-and-arrays":
         title:      "Using Objects and Array Keys"
         is_free:    false
         length:     3:26
         activities:
-            - objects_property_accessor
+            - { name: objects_property_accessor, time: 2:52 }
     "layout-template-inheritance":
         title:      "Using a Layout: Template Inheritance"
         is_free:    false
         length:     6:01
         activities:
-            - layout_basic
-            - layout_title_block
+            - { name: layout_basic, time: 2:37 }
+            - { name: layout_title_block, time: 3:52 }
     "including-other-templates":
         title:      "Including other Templates"
         is_free:    false
