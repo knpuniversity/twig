@@ -2,13 +2,15 @@
 
 use KnpU\ActivityRunner\Assert\AssertSuite;
 
+use KnpU\ActivityRunner\Result;
+
 class LengthFilterSuite extends AssertSuite
 {
-    public function testDataTagCountSetProperly()
+    public function runTest(Result $resultSummary)
     {
-        $output = $this->getOutput();
-        $crawler = $this->getCrawler();
-        $context = $this->getActivity()->getContext();
+        $output = $resultSummary->getOutput();
+        $crawler = $this->getCrawler($output);
+        $context = require(__DIR__.'/../basics/context_loop_variables.php');
 
         $tagsUI = $crawler->filter('ul.tags[data-tag-count]');
 

@@ -2,12 +2,13 @@
 
 use KnpU\ActivityRunner\Assert\AssertSuite;
 
+use KnpU\ActivityRunner\Result;
+
 class PrintPostedAtSuite extends AssertSuite
 {
-    public function testHasUsedFilter()
+    public function runTest(Result $resultSummary)
     {
-        $inputFiles = $this->getActivity()->getInputFiles();
-        $input = $inputFiles->get('product.twig');
+        $input = $resultSummary->getInput();
 
         // Look for `|date` without caring about spaces.
         $this->assertRegExp('#\|\s*date#', $input,
@@ -19,7 +20,7 @@ class PrintPostedAtSuite extends AssertSuite
         );
 
         // Now check that things are in the right spot.
-        $postedAts = $this->getCrawler()->filter('.posted-at');
+        $postedAts = $this->getCrawler($resultSummary->getOutput())->filter('.posted-at');
 
         $this->assertEquals(1, count($postedAts), 'Did you forget to render the date inside an element with a "posted-at" class?');
         $this->assertRegexp("/2013-06-05/", $postedAts->text());

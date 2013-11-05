@@ -1,17 +1,17 @@
 <?php
 
 use KnpU\ActivityRunner\Assert\AssertSuite;
+use KnpU\ActivityRunner\Result;
 
 class BasicLayoutSuite extends AssertSuite
 {
-    public function testLayoutIsExtended()
+    public function runTest(Result $resultSummary)
     {
-        $context = $this->getActivity()->getContext();
         $expectedTitle = 'Products Home';
+        $output = $resultSummary->getOutput();
 
-        $inputFiles = $this->getActivity()->getInputFiles();
-        $layoutInput = $inputFiles->get('layout.twig');
-        $productInput = $inputFiles->get('product.twig');
+        $layoutInput = $resultSummary->getInput('layout.twig');
+        $productInput = $resultSummary->getInput('product.twig');
 
         // look for {% block title %} with any number of spaces
         $err = "Make sure you create a new `title` block in `layout.twig`: `{% block title %}Twig! Yeehaw!{% endblock %}`";
@@ -22,7 +22,7 @@ class BasicLayoutSuite extends AssertSuite
         $this->assertRegExp('#{%\s*block\s+title\s*#', $productInput, $err);
 
         // look for the h1 tag inside the layout's #layout element
-        $title = $this->getCrawler()->filter('title')->text();
+        $title = $this->getCrawler($output)->filter('title')->text();
         // trim extra space
         $title = trim($title);
         $err = sprintf(

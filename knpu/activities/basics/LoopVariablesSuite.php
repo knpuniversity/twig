@@ -2,21 +2,21 @@
 
 use KnpU\ActivityRunner\Assert\AssertSuite;
 
+use KnpU\ActivityRunner\Result;
+
 class LoopVariablesSuite extends AssertSuite
 {
-    public function testHasForTagInTags()
+    public function runTest(Result $resultSummary)
     {
-        $inputFiles = $this->getActivity()->getInputFiles();
-        $input = $inputFiles['product.twig'];
+        $input = $resultSummary->getInput('product.twig');
+        $output = $resultSummary->getOutput();
 
         // Matches "{% for" without worrying about how spaces.
         $this->assertRegExp('#{%\s*for#', $input,
             'Did you forget to add the "{% for tag in tags %}" tag?'
         );
 
-        $context = $this->getActivity()->getContext();
-        $output = $this->getOutput();
-
+        $context = require(__DIR__.'/context_loop_variables.php');
         foreach ($context['tags'] as $tag) {
             $this->assertContains($tag, $output,
                 'Did you forget to render the tags?'
@@ -24,7 +24,7 @@ class LoopVariablesSuite extends AssertSuite
         }
 
         // Finally checks that things are in the right spot.
-        $crawler = $this->getCrawler();
+        $crawler = $this->getCrawler($output);
         $tagLis = $crawler->filter('ul.tags li');
 
         $this->assertCount(3, $tagLis,
