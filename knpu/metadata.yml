@@ -37,8 +37,8 @@ chapters:
         length:     5:50
         activities:
             - { name: functions_length, time: 3:02 }
-            - { name: functions_print_posted_at, time: 4:31 }
             - { name: functions_dump, time: 5:25 }
+            - { name: functions_print_posted_at, time: 4:31 }
     "objects-and-arrays":
         title:      "Using Objects and Array Keys"
         is_free:    false
