@@ -1,9 +1,10 @@
 <?php
 
-use KnpU\ActivityRunner\Assert\AssertSuite;
 use KnpU\ActivityRunner\Result;
 
-class PropertyAccessorSuite extends AssertSuite
+require __DIR__ . '/../shared/AbstractSuite.php';
+
+class PropertyAccessorSuite extends AbstractSuite
 {
     public function runTest(Result $resultSummary)
     {
@@ -22,7 +23,8 @@ class PropertyAccessorSuite extends AssertSuite
             'Did you forget to render the name? Remember to use the "say something" syntax: {{ product.varName }}'
         );
 
-        $h1Text = $this->getCrawler($output)->filter('h1')->text();
+        $h1El = $this->findElementByCss('h1', $output, 'Could not find the h1 tag! Where did you put it? :).');
+        $h1Text = $h1El->text();
 
         $this->assertContains($name, $h1Text,
             'It looks like you rendered the name, but did you forget to put it inside the h1 tag?'
@@ -38,9 +40,9 @@ class PropertyAccessorSuite extends AssertSuite
             'Did you forget to render the price? Remember to use the "say something" syntax: {{ product.varName }}'
         );
 
-        $priceText = $this->getCrawler($output)->filter('.price')->text();
+        $priceEl = $this->findElementByCss('.price', $output, 'Could not find the .price element at all!');
 
-        $this->assertContains((string) $price, $priceText,
+        $this->assertContains((string) $price, $priceEl->text(),
             'It looks like you rendered the price, but did you forget to put it inside the `.price` tag?'
         );
     }
@@ -49,9 +51,8 @@ class PropertyAccessorSuite extends AssertSuite
     {
         $output = $resultSummary->getOutput();
         // Now check that things are in the right spot.
-        $postedAts = $this->getCrawler($output)->filter('.posted-at');
+        $postedAts = $this->findElementByCss('.posted-at', $output, 'Did you forget to render the date inside an element with a "posted-at" class?');
 
-        $this->assertEquals(1, count($postedAts), 'Did you forget to render the date inside an element with a "posted-at" class?');
         $this->assertRegexp("/2013-06-05/", $postedAts->text());
     }
 }

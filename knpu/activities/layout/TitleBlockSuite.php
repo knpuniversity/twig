@@ -1,9 +1,10 @@
 <?php
 
-use KnpU\ActivityRunner\Assert\AssertSuite;
 use KnpU\ActivityRunner\Result;
 
-class BasicLayoutSuite extends AssertSuite
+require __DIR__ . '/../shared/AbstractSuite.php';
+
+class BasicLayoutSuite extends AbstractSuite
 {
     public function runTest(Result $resultSummary)
     {
@@ -21,8 +22,9 @@ class BasicLayoutSuite extends AssertSuite
         $err = "To override the title in `product.twig`, add a `{% block title %}` to the `product.twig` template. Put the customized title between it and `{% endblock %}`";
         $this->assertRegExp('#{%\s*block\s+title\s*#', $productInput, $err);
 
-        // look for the h1 tag inside the layout's #layout element
-        $title = $this->getCrawler($output)->filter('title')->text();
+        // look for the title tag inside the layout's #layout element
+        $titleEl = $this->findElementByCss('title', $output, 'I can\'t find your <title> tag at all! Check to make sure it\'s still there!');
+        $title = $titleEl->text();
         // trim extra space
         $title = trim($title);
         $err = sprintf(

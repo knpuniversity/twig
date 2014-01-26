@@ -1,10 +1,9 @@
 <?php
 
-use KnpU\ActivityRunner\Assert\AssertSuite;
-
 use KnpU\ActivityRunner\Result;
+require __DIR__ . '/../shared/AbstractSuite.php';
 
-class PrintVariablesSuite extends AssertSuite
+class PrintVariablesSuite extends AbstractSuite
 {
     public function runTest(Result $resultSummary)
     {
@@ -22,7 +21,8 @@ class PrintVariablesSuite extends AssertSuite
             'Did you forget to render the name? Remember to use the "say something" syntax: {{ varName }}'
         );
 
-        $h1Text = $this->getCrawler($output)->filter('h1')->text();
+        $h1El = $this->findElementByCss('h1', $output, 'Could not find the h1 tag! Where did you put it? :).');
+        $h1Text = $h1El->text();
 
         $this->assertContains($context['name'], $h1Text,
             'It looks like you rendered the name, but did you forget to put it inside the h1 tag?'
@@ -37,7 +37,8 @@ class PrintVariablesSuite extends AssertSuite
             'Did you forget to render the price? Remember to use the "say something" syntax: {{ varName }}'
         );
 
-        $priceText = $this->getCrawler($output)->filter('.price')->text();
+        $priceEl = $this->findElementByCss('.price', $output, 'Could not find the .price element at all!');
+        $priceText = $priceEl->text();
 
         $this->assertContains((string) $context['price'], $priceText,
             'It looks like you rendered the price, but did you forget to put it inside the `.price` tag?'
