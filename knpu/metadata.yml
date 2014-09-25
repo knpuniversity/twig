@@ -29,6 +29,7 @@ chapters:
         title:      Twig: The Basics
         is_free:    true
         length:     6:07
+        video_key:  lc2wt3p3ub
         activities:
             - { name: basics_print_variables, time: 2:39 }
             - { name: basics_loop_variables, time: 3:46 }
@@ -36,6 +37,7 @@ chapters:
         title:      "Functions, Filters and Debugging with dump"
         is_free:    false
         length:     5:50
+        video_key:  4zmj1h0ulk
         activities:
             - { name: functions_length, time: 3:02 }
             - { name: functions_dump, time: 5:25 }
@@ -44,12 +46,14 @@ chapters:
         title:      "Using Objects and Array Keys"
         is_free:    false
         length:     3:26
+        video_key:  yh82ku3f00
         activities:
             - { name: objects_property_accessor, time: 2:52 }
     "layout-template-inheritance":
         title:      "Using a Layout: Template Inheritance"
         is_free:    false
         length:     6:01
+        video_key:  94ro995kta
         activities:
             - { name: layout_basic, time: 2:37 }
             - { name: layout_title_block, time: 3:52 }
@@ -57,19 +61,24 @@ chapters:
         title:      "Including other Templates"
         is_free:    false
         length:     2:12
+        video_key:  li7kbkngrj
     "tests-if-statements":
         title:      'If Statements with "Tests"'
         is_free:    false
         length:     2:30
+        video_key:  nry8brykdc
     "for-loop-inline-if":
         title:      'The for "loop" and inline "if" Syntax'
         is_free:    false
         length:     3:58
+        video_key:  0mxtp3srvz
     "mistakes-macros":
         title:      "Mistakes and Macros"
         is_free:    false
         length:     5:17
+        video_key:  os1xausx5k
     "extra-credit-tricks-escaping":
         title:      "Extra Credit Tricks and HTML Escaping"
         is_free:    false
         length:     5:56
+        video_key:  h08qcp0agi
