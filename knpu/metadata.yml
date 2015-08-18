@@ -27,27 +27,15 @@ chapters:
         title:      Twig: The Basics
         is_free:    true
         video_key:  lc2wt3p3ub
-        activities:
-            - { name: basics_print_variables }
-            - { name: basics_loop_variables }
     "functions-filters":
         title:      "Functions, Filters and Debugging with dump"
         video_key:  4zmj1h0ulk
-        activities:
-            - { name: functions_length }
-            - { name: functions_dump }
-            - { name: functions_print_posted_at }
     "objects-and-arrays":
         title:      "Using Objects and Array Keys"
         video_key:  yh82ku3f00
-        activities:
-            - { name: objects_property_accessor }
     "layout-template-inheritance":
         title:      "Using a Layout: Template Inheritance"
         video_key:  94ro995kta
-        activities:
-            - { name: layout_basic }
-            - { name: layout_title_block }
     "including-other-templates":
         title:      "Including other Templates"
         video_key:  li7kbkngrj
