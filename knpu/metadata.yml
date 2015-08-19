@@ -48,21 +48,21 @@ chapters:
         title:      "Using a Layout: Template Inheritance"
         video_key:  94ro995kta
         challenges:
-            - Challanges\LayoutTemplateInheritance\CreateLayoutRemoveDuplicationCoding
-            - Challanges\LayoutTemplateInheritance\FixExtendsErrorCoding
-            - Challanges\LayoutTemplateInheritance\AddBlockAndOverrideCoding
+            - Challenges\LayoutTemplateInheritance\CreateLayoutRemoveDuplicationCoding
+            - Challenges\LayoutTemplateInheritance\FixExtendsErrorCoding
+            - Challenges\LayoutTemplateInheritance\AddBlockAndOverrideCoding
     "including-other-templates":
         title:      "Including other Templates"
         video_key:  li7kbkngrj
         challenges:
-            - Challanges\IncludingOtherTemplates\UseIncludeCoding
-            - Challanges\IncludingOtherTemplates\IncludeAndVariablesMC
+            - Challenges\IncludingOtherTemplates\UseIncludeCoding
+            - Challenges\IncludingOtherTemplates\IncludeAndVariablesMC
     "tests-if-statements":
         title:      'If Statements with "Tests"'
         video_key:  nry8brykdc
         challenges:
-            - Challanges\TestsIfStatements\TestIfOddCoding
-            - Challanges\TestsIfStatements\ComplexTestAndNotCoding
+            - Challenges\TestsIfStatements\TestIfOddCoding
+            - Challenges\TestsIfStatements\ComplexTestAndNotCoding
     "for-loop-inline-if":
         title:      'The for "loop" and inline "if" Syntax'
         video_key:  0mxtp3srvz
