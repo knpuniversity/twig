@@ -19,8 +19,8 @@ class PrintVariableCoding implements CodingChallengeInterface
         return <<<EOF
 At Penguins Pants Plus, the tailors have been working really hard
 on the fall collection, and we're helping them out by building
-out the template for this page! A `collectionTitle` variable has been
-passed into the template: print it out inside the `<h1>` tag!
+the template for this page! A `collectionTitle` variable has been
+passed into the template: print it inside the `<h1>` tag!
 EOF;
     }
 
