@@ -34,9 +34,16 @@ chapters:
     "functions-filters":
         title:      "Functions, Filters and Debugging with dump"
         video_key:  4zmj1h0ulk
+        challenges:
+            - Challenges\FunctionsFilters\DateFilterCoding
+            - Challenges\FunctionsFilters\RandomFunctionWithFilterCoding
+            - Challenges\FunctionsFilters\DumpFindVariableCoding
     "objects-and-arrays":
         title:      "Using Objects and Array Keys"
         video_key:  yh82ku3f00
+        challenges:
+            - Challenges\ObjectsAndArrays\PrintRandomArrayKeyCoding
+            - Challenges\ObjectsAndArrays\PrintProductObjectsCoding
     "layout-template-inheritance":
         title:      "Using a Layout: Template Inheritance"
         video_key:  94ro995kta
