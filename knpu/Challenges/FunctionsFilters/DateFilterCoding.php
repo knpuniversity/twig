@@ -17,11 +17,11 @@ class DateFilterCoding implements CodingChallengeInterface
     public function getQuestion()
     {
         return <<<EOF
-The penguins will want to shop as *soon* as possible. So, we're
-passing in a `saleStartsAt` date variable that's set to *when*
-these fresh pants go on sale. Print this using the `date`
-**filter** and the `F jS` format (e.g. January 5th) inside the
-`h3` tag.
+The penguins will want to get their flippers on these pants as 
+*soon* as possible. So, we're passing in a `saleStartsAt` date 
+variable that's set to *when* these fresh pants are available. Print 
+this using the `date` **filter** and the `F jS` format (e.g. January 5th) 
+inside the `h3` tag.
 EOF;
     }
 
