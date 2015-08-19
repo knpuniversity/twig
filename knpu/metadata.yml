@@ -54,6 +54,9 @@ chapters:
     "including-other-templates":
         title:      "Including other Templates"
         video_key:  li7kbkngrj
+        challenges:
+            - Challanges\IncludingOtherTemplates\UseIncludeCoding
+            - Challanges\IncludingOtherTemplates\IncludeAndVariablesMC
     "tests-if-statements":
         title:      'If Statements with "Tests"'
         video_key:  nry8brykdc
