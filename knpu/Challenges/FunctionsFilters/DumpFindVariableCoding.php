@@ -17,7 +17,7 @@ class DumpFindVariableCoding implements CodingChallengeInterface
     public function getQuestion()
     {
         return <<<EOF
-All the hardcore PHP developers are at lunch. Lazy! You know that
+All the AirPupnMeow PHP developers are at lunch. You know that
 a new variable is being passed to the template that's set to
 the description for the fall collection, but you don't know what
 the variable is called! Use the `dump()` function to find out
