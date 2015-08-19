@@ -16,11 +16,12 @@ class AddBlockAndOverrideCoding implements CodingChallengeInterface
         return <<<EOF
 Every page on the site has our tag line at the bottom:
 `You're hip, you're cool, you're a penguin!`. But on the fall collection page,
-you need to override that to say: `Winter is coming! Get your pants!`. Update
-`layout.twig` so that we can override this phrase and override it in
-`fallCollection.twig`. Just make sure that
-`You're hip, you're cool, you're a penguin!` is still the default tag line,
-for all the other templates that *don't* override it.
+you need to override that to say: `Winter is coming! Get your pants!`. 
+
+Update `layout.twig` so that we can override this phrase. Then actually override it in
+`fallCollection.twig`. Just make sure that `You're hip, you're cool, you're 
+a penguin!` is still the default tag line, for all the other templates that 
+*don't* override it.
 EOF;
     }
 
