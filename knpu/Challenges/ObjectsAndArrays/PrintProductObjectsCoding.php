@@ -16,9 +16,11 @@ class PrintProductObjectsCoding implements CodingChallengeInterface
         return <<<EOF
 The backend developers are getting really fancy and have changed the
 products from simple strings to objects! Use the `dump()` function - or look
-at the `PantsProduct` class - to fix the template and print out both
-the `name` and `price` of the product. To be extra awesome, see if you
-can also print out the date each product will be released.
+at the `PantsProduct` class - to check it out. 
+
+Fix the template and print out both the `name` and `price` of the product. 
+To be extra awesome, see if you can also print out the date each product will 
+be released.
 EOF;
     }
 
