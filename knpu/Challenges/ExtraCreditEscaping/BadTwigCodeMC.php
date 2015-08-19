@@ -1,18 +1,16 @@
 <?php
 
-namespace Challenges\MistakesMacros;
+namespace Challenges\ExtraCreditEscaping;
 
 use KnpU\ActivityRunner\Activity\MultipleChoice\AnswerBuilder;
 use KnpU\ActivityRunner\Activity\MultipleChoiceChallengeInterface;
 
-class BlankVariableErrorMC implements MultipleChoiceChallengeInterface
+class BadTwigCodeMC implements MultipleChoiceChallengeInterface
 {
     public function getQuestion()
     {
         return <<<EOF
-If you see the following error, what's the likely cause?:
-
-'Item "name" for "" does not exist in homepage.twig'
+Which of the following is bad Twig code:
 EOF;
 
     }
@@ -20,7 +18,7 @@ EOF;
     public function configureAnswers(AnswerBuilder $builder)
     {
         $builder->addAnswer('ANSWER HERE')
-            ->addAnswer('ANSWER HERE')
+            ->addAnswer('{{ ('Hello '~name)|upper }} B) {{- 'Hello'|upper -}} C) {{ name|default('Leanna') }} D) {~ name|upper ~}', true)
             ->addAnswer('ANSWER HERE')
             ->addAnswer('ANSWER HERE');
     }

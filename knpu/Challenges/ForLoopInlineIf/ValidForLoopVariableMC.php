@@ -17,10 +17,10 @@ EOF;
 
     public function configureAnswers(AnswerBuilder $builder)
     {
-        $builder->addAnswer(ANSWER HERE)
-            ->addAnswer(ANSWER HERE)
-            ->addAnswer(ANSWER HERE)
-            ->addAnswer(ANSWER HERE);
+        $builder->addAnswer('ANSWER HERE')
+            ->addAnswer('ANSWER HERE')
+            ->addAnswer('ANSWER HERE')
+            ->addAnswer('ANSWER HERE');
     }
 
     public function getExplanation()
