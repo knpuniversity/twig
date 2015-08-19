@@ -1,5 +1,4 @@
 title:  Twig Templating for Friendly Frontend Devs
-length: 41:18
 summary: |
     Welcome to Twig! If you're a frontend developer and you're using Twig
     in your project, then this course is for you! We'll talk about how to
@@ -24,7 +23,6 @@ videoDownloadExtension: mov
 
 chapters:
     basics:
-        title:      Twig: The Basics
         is_free:    true
         video_key:  lc2wt3p3ub
         challenges:
@@ -32,39 +30,33 @@ chapters:
             - Challenges\Basics\ForLoopCoding
             - Challenges\Basics\IncorrectOpenTagsMC
     "functions-filters":
-        title:      "Functions, Filters and Debugging with dump"
         video_key:  4zmj1h0ulk
         challenges:
             - Challenges\FunctionsFilters\DateFilterCoding
             - Challenges\FunctionsFilters\RandomFunctionWithFilterCoding
             - Challenges\FunctionsFilters\DumpFindVariableCoding
     "objects-and-arrays":
-        title:      "Using Objects and Array Keys"
         video_key:  yh82ku3f00
         challenges:
             - Challenges\ObjectsAndArrays\PrintRandomArrayKeyCoding
             - Challenges\ObjectsAndArrays\PrintProductObjectsCoding
     "layout-template-inheritance":
-        title:      "Using a Layout: Template Inheritance"
         video_key:  94ro995kta
         challenges:
             - Challenges\LayoutTemplateInheritance\CreateLayoutRemoveDuplicationCoding
             - Challenges\LayoutTemplateInheritance\FixExtendsErrorCoding
             - Challenges\LayoutTemplateInheritance\AddBlockAndOverrideCoding
     "including-other-templates":
-        title:      "Including other Templates"
         video_key:  li7kbkngrj
         challenges:
             - Challenges\IncludingOtherTemplates\UseIncludeCoding
             - Challenges\IncludingOtherTemplates\IncludeAndVariablesMC
     "tests-if-statements":
-        title:      'If Statements with "Tests"'
         video_key:  nry8brykdc
         challenges:
             - Challenges\TestsIfStatements\TestIfOddCoding
             - Challenges\TestsIfStatements\ComplexTestAndNotCoding
     "for-loop-inline-if":
-        title:      'The for "loop" and inline "if" Syntax'
         video_key:  0mxtp3srvz
         challenges:
             - Challenges\ForLoopInlineIf\ValidForLoopVariableMC
@@ -72,14 +64,12 @@ chapters:
             - Challenges\ForLoopInlineIf\OneLineIfStatementCoding
             - Challenges\ForLoopInlineIf\ForTagConditionsCoding
     "mistakes-macros":
-        title:      "Mistakes and Macros"
         video_key:  os1xausx5k
         challenges:
             - Challenges\MistakesMacros\IncludeMistakeCoding
             - Challenges\MistakesMacros\BlankVariableErrorMC
             - Challenges\MistakesMacros\SizeChartMacroCoding
     "extra-credit-tricks-escaping":
-        title:      "Extra Credit Tricks and HTML Escaping"
         video_key:  h08qcp0agi
         challenges:
             - Challenges\ExtraCreditEscaping\SideBarBlockCoding
