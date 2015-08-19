@@ -6,10 +6,15 @@ class PantsProduct
 
     private $price;
 
-    public function __construct($name, $price)
+    private $quantity;
+
+    private $description;
+
+    public function __construct($name, $price, $quantity = 0)
     {
         $this->name = $name;
         $this->price = $price;
+        $this->quantity = $quantity;
     }
 
     public function getName()
@@ -27,5 +32,15 @@ class PantsProduct
         // our designers don't know when things will get released yet, so just
         // always say it will be 1 week from now!
         return new \DateTime('+1 week');
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }

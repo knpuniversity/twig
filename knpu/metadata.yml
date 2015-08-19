@@ -66,9 +66,22 @@ chapters:
     "for-loop-inline-if":
         title:      'The for "loop" and inline "if" Syntax'
         video_key:  0mxtp3srvz
+        challenges:
+            - Challenges\ForLoopInlineIf\ValidForLoopVariableMC
+            - Challenges\ForLoopInlineIf\ForElseCoding
+            - Challenges\ForLoopInlineIf\OneLineIfStatementCoding
+            - Challenges\ForLoopInlineIf\ForTagConditionsCoding
     "mistakes-macros":
         title:      "Mistakes and Macros"
         video_key:  os1xausx5k
+        challenges:
+            - Challenges\MistakesMacros\IncludeMistakeCoding
+            - Challenges\MistakesMacros\BlankVariableErrorMC
+            - Challenges\MistakesMacros\SizeChartMacroCoding
     "extra-credit-tricks-escaping":
         title:      "Extra Credit Tricks and HTML Escaping"
         video_key:  h08qcp0agi
+        challenges:
+            - Challenges\ExtraCreditEscaping\SideBarBlockCoding
+            - Challenges\ExtraCreditEscaping\BadTwigCodeMC
+            - Challenges\ExtraCreditEscaping\WYSIWYGFilterCoding

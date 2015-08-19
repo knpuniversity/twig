@@ -9,7 +9,7 @@ use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
 use KnpU\ActivityRunner\Activity\Exception\GradingException;
 use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
 
-class IncludeMistake implements CodingChallengeInterface
+class IncludeMistakeCoding implements CodingChallengeInterface
 {
     /**
      * @return string
@@ -18,7 +18,6 @@ class IncludeMistake implements CodingChallengeInterface
     {
         return <<<EOF
 Fix the following code:
-{{ include('foo', name: 'bar') }}
 EOF;
     }
 
@@ -26,7 +25,16 @@ EOF;
     {
         $fileBuilder = new FileBuilder();
 
-        $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
+        $fileBuilder->addFileContents('aboutPenguins.twig', <<<EOF
+{{ include('_cannotFly.twig', reason: 'little wings') }}
+EOF
+        );
+        $fileBuilder->setEntryPointFilename('aboutPenguins.twig');
+
+        $fileBuilder->addFileContents('_cannotFly.twig', <<<EOF
+<div>
+    Penguins cannot fly, due to: {{ reason }}
+</div>
 EOF
         );
 
@@ -40,21 +48,18 @@ EOF
 
     public function setupContext(CodingContext $context)
     {
-        $context->addVariable('collectionTitle', 'Fall in love and look your best in the snow.');
+
     }
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertInputContains('fallCollection.twig', 'collectionTitle');
-        $result->assertElementContains('h1', 'Fall in love and look your best in the snow.');
+        $result->assertOutputContains('due to: little wings');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)
     {
-        $correctAnswer->setFileContents('fallCollection.twig', <<<EOF
-<h1>
-    {{ collectionTitle }}
-</h1>
+        $correctAnswer->setFileContents('aboutPenguins.twig', <<<EOF
+{{ include('_cannotFly.twig', { 'reason': 'little wings' }) }}
 EOF
         );
     }
