@@ -60,6 +60,9 @@ chapters:
     "tests-if-statements":
         title:      'If Statements with "Tests"'
         video_key:  nry8brykdc
+        challenges:
+            - Challanges\TestsIfStatements\TestIfOddCoding
+            - Challanges\TestsIfStatements\ComplexTestAndNotCoding
     "for-loop-inline-if":
         title:      'The for "loop" and inline "if" Syntax'
         video_key:  0mxtp3srvz

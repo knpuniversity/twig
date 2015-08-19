@@ -1,0 +1,88 @@
+<?php
+
+namespace Challenges\TestsIfStatements;
+
+use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
+use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
+use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
+use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
+use KnpU\ActivityRunner\Activity\Exception\GradingException;
+use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+
+class ComplexTestAndNotCoding implements CodingChallengeInterface
+{
+    public function getQuestion()
+    {
+        return <<<EOF
+When we show the featured product, sometimes we pass a `quantityRemaining` variable
+to `_featuredProduct.twig`, but sometimes we don't. To make matters worse, remember that
+Penguins hate odd numbers! Add an `if` statement so that the `featured-quantity`
+element is printed *only* if `quantityRemaining`is defined **and** if it is *not*
+an odd number.
+
+**Hint**: No `quantityRemaining` variable is being passed to `fallCollection.twig`.
+But you can test your logic by passing a `quantityRemaining` variable in your
+`include()` function with different values.
+EOF;
+    }
+
+    public function getFileBuilder()
+    {
+        $fileBuilder = new FileBuilder();
+
+        $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
+{{ include('_featuredProduct.twig') }}
+EOF
+        );
+        $fileBuilder->addFileContents('_featuredProduct.twig', <<<EOF
+    <section class="featured-product">
+        This week's featured product is a pin-striped full suit, complete
+        with cane, monocle and an elegant pocket watch!
+
+        <div class="featured-quantity">
+            {{ quantityRemaining }}
+        </div>
+
+        <button class="btn btn-primary">Buy now</button>
+    </section>
+EOF
+        );
+        $fileBuilder->setEntryPointFilename('fallCollection.twig');
+
+        return $fileBuilder;
+    }
+
+    public function getExecutionMode()
+    {
+        return self::EXECUTION_MODE_TWIG_NORMAL;
+    }
+
+    public function setupContext(CodingContext $context)
+    {
+    }
+
+    public function grade(CodingExecutionResult $result)
+    {
+        $result->assertInputContains('_featuredProduct.twig', 'defined', 'Use the `defined` filter to see if `quantityRemaining` is defined');
+        $result->assertInputContains('fallCollection.twig', 'is not odd', 'Use `is not odd` to make sure `quantityRemaining` is not an odd number. (Hint: you could also use `is even` in real life... but not to pass this challenge)');
+    }
+
+    public function configureCorrectAnswer(CorrectAnswer $correctAnswer)
+    {
+        $correctAnswer->setFileContents('_featuredProduct.twig', <<<EOF
+<section class="featured-product">
+    This week's featured product is a pin-striped full suit, complete
+    with cane, monocle and an elegant pocket watch!
+
+    {% if quantityRemaining is defined and quantityRemaining is not odd %}
+    <div class="featured-quantity">
+        {{ quantityRemaining }}
+    </div>
+    {% endif %}
+
+    <button class="btn btn-primary">Buy now</button>
+</section>
+EOF
+        );
+    }
+}
