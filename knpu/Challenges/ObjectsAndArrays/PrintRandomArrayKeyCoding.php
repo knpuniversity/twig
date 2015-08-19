@@ -18,7 +18,7 @@ Penguins are known to be indecisive. To make things easier for them,
 we're creating a random product selector. In the template, you have a
 new `randomProductKey` variable, that's a number from 0 to 3 - matching
 the indices on the `products` array. Use this new variable to print
-the "random product" inside the `h3` tag.
+the "random product" inside the `h2` tag.
 EOF;
     }
 
@@ -27,9 +27,9 @@ EOF;
         $fileBuilder = new FileBuilder();
 
         $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
-<div class="featured-product">
+<h2 class="featured-product">
     <!-- use randomProductKey to randomly select and print a random product -->
-</div>
+</h2>
 
 {% for product in products %}
     <h3>{{ product }}</h3>
@@ -64,9 +64,9 @@ EOF
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)
     {
         $correctAnswer->setFileContents('fallCollection.twig', <<<EOF
-<div class="featured-product">
+<h2 class="featured-product">
     {{ products[randomProductKey] }}
-</div>
+</h2>
 
 {% for product in products %}
     <h3>{{ product }}</h3>

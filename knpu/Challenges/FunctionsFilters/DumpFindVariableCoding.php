@@ -23,7 +23,7 @@ the description for the fall collection, but you don't know what
 the variable is called! Use the `dump()` function to find out
 what the variable is called (and don't worry that the challenge
 is graded wrong at first). Then, print this variable inside
-the `h3` tag.
+the `header` tag.
 EOF;
     }
 
@@ -56,7 +56,7 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertInputContains('fallCollection.twig', 'fallCollectionPromoDescription');
+        $result->assertInputContains('fallCollection.twig', 'fallCollectionPromoDescription', 'I don\'t see you printing the unknown variable yet...');
         $result->assertOutputContains('Still wearing your summer swim shorts');
     }
 

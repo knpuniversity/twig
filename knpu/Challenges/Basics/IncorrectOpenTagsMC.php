@@ -17,11 +17,19 @@ EOF;
 
     public function configureAnswers(AnswerBuilder $builder)
     {
-        $builder->addAnswer('`{{
-                pageTitle     }}`')
-            ->addAnswer('`{# for nonExistentVariable in bad syntax here #}`')
-            ->addAnswer('`{{ for product in my_products }}`', true)
-            ->addAnswer('`{% set penguins = \'dapper\' %}`');
+        $builder->addAnswer('```twig
+{{
+pageTitle     }}
+```')
+            ->addAnswer('```twig
+{# for nonExistentVariable in bad syntax here #}
+```')
+            ->addAnswer('```twig
+{{ for product in my_products }}
+```', true)
+            ->addAnswer('```twig
+{% set penguins = \'dapper\' %}
+```');
     }
 
     public function getExplanation()

@@ -41,7 +41,8 @@ EOF;
         <tr>
             <td>{{ product }}</td>
             <td>
-                <!-- print black, white or green here randomly and uppercase them -->
+                <!-- print black, white or green here randomly -->
+                <!-- and make them all capital letters -->
             </td>
         </tr>
     {% endfor %}
@@ -74,6 +75,13 @@ EOF
         $result->assertInputContains('fallCollection.twig', 'black', 'Use `black` (lowercase) as one of the random colors', true);
         $result->assertInputContains('fallCollection.twig', 'white', 'Use `black` (lowercase) as one of the random colors', true);
         $result->assertInputContains('fallCollection.twig', 'green', 'Use `black` (lowercase) as one of the random colors', true);
+
+        if (!$result->doesOutputContain('BLACK', true)
+            && !$result->doesOutputContain('WHITE', true)
+            && !$result->doesOutputContain('GREEN', true)
+        ) {
+            throw new GradingException('The output does not contain any of the colors BLACK, GREEN or WHITE - are you randomly selecting one of these and uppercasing them?');
+        }
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)
@@ -90,7 +98,7 @@ EOF
         <tr>
             <td>{{ product }}</td>
             <td>
-                {{ random({'black', 'white', 'green'})|upper }}
+                {{ random(['black', 'white', 'green'])|upper }}
             </td>
         </tr>
     {% endfor %}
