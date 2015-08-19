@@ -27,6 +27,10 @@ chapters:
         title:      Twig: The Basics
         is_free:    true
         video_key:  lc2wt3p3ub
+        challenges:
+            - Challenges\Basics\PrintVariableCoding
+            - Challenges\Basics\ForLoopCoding
+            - Challenges\Basics\IncorrectOpenTagsMC
     "functions-filters":
         title:      "Functions, Filters and Debugging with dump"
         video_key:  4zmj1h0ulk
