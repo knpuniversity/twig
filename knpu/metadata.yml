@@ -47,6 +47,10 @@ chapters:
     "layout-template-inheritance":
         title:      "Using a Layout: Template Inheritance"
         video_key:  94ro995kta
+        challenges:
+            - Challanges\LayoutTemplateInheritance\CreateLayoutRemoveDuplicationCoding
+            - Challanges\LayoutTemplateInheritance\FixExtendsErrorCoding
+            - Challanges\LayoutTemplateInheritance\AddBlockAndOverrideCoding
     "including-other-templates":
         title:      "Including other Templates"
         video_key:  li7kbkngrj
