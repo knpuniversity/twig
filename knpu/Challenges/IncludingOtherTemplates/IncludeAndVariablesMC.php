@@ -1,6 +1,6 @@
 <?php
 
-namespace Challenges\Basics;
+namespace Challenges\IncludingOtherTemplates;
 
 use KnpU\ActivityRunner\Activity\MultipleChoice\AnswerBuilder;
 use KnpU\ActivityRunner\Activity\MultipleChoiceChallengeInterface;
@@ -60,7 +60,7 @@ EOF;
 Look at each variable, one at a time:
 
 * `color`: This is passed from `homepage.twig` to `_otherTemplate.twig` as `blue`.
-But then, `_otherTemplate.twig` passes a new value to `_thirdTemplate.twig`: red.
+But then, `_otherTemplate.twig` passes a new value to `_thirdTemplate.twig`: `red`.
 The `default` filter doesn't do anything, since this value *is* set.
 
 * `number`: At first, `number` is set to `5` inside `_thirdTemplate.twig`, but

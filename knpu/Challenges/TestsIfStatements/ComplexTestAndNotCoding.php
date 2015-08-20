@@ -64,7 +64,7 @@ EOF
     public function grade(CodingExecutionResult $result)
     {
         $result->assertInputContains('_featuredProduct.twig', 'defined', 'Use the `defined` filter to see if `quantityRemaining` is defined');
-        $result->assertInputContains('fallCollection.twig', 'is not odd', 'Use `is not odd` to make sure `quantityRemaining` is not an odd number. (Hint: you could also use `is even` in real life... but not to pass this challenge)');
+        $result->assertInputContains('_featuredProduct.twig', 'is not odd', 'Use `is not odd` to make sure `quantityRemaining` is not an odd number. (Hint: you could also use `is even` in real life... but not to pass this challenge)');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)

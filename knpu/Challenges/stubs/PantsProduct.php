@@ -43,4 +43,9 @@ class PantsProduct
     {
         $this->description = $description;
     }
+
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
 }

@@ -16,13 +16,16 @@ class SideBarBlockCoding implements CodingChallengeInterface
      */
     public function getQuestion()
     {
+        // hint would be: use the `block()` function
+
         return <<<EOF
 Most pages override the sidebar block, but not `fallCollection.twig`!
 Unfortunately, even though the sidebar is empty, the `<div class="col-xs-3">`
-still exists, so the content is pushed to the right. Let's fix this:
+element in `layout.twig` still exists, so the content is pushed to the right.
+Let's fix this:
 
-A) Add some logic so the extra `<div class="col-xs-3">` and its closing tag
-are only rendered if the sidebar block has content.
+A) Add some logic so the extra `<div class="col-xs-3">` (in `layout.twig`) and its
+closing tag are only rendered if the sidebar block has content.
 
 B) Change the `col-xs-9` to `col-xs-12` if the sidebar block has no content,
 so it takes up the full-width of the page.
@@ -44,19 +47,19 @@ EOF
         $fileBuilder->setEntryPointFilename('fallCollection.twig');
 
         $fileBuilder->addFileContents('layout.twig', <<<EOF
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <title>Penguins Pants Plus!</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <div class="row">
-            <div class="col-xs-9">
-                {% block body %}{% endblock %}
-            </div>
-            <div class="col-xs-3">
-                {% block sidebar %}{% endblock %}
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3">
+                    {% block sidebar %}{% endblock %}
+                </div>
+                <div class="col-xs-9">
+                    {% block body %}{% endblock %}
+                </div>
             </div>
         </div>
     </body>
@@ -87,22 +90,23 @@ EOF
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)
     {
         $correctAnswer->setFileContents('layout.twig', <<<EOF
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <title>Penguins Pants Plus!</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <div class="row">
-            <div class="{{ block('sidebar') ? 'col-xs-9' : 'col-xs-12' }}">
-                {% block body %}{% endblock %}
+        <div class="container">
+            <div class="row">
+                {% if block('sidebar') %}
+                <div class="col-xs-3">
+                    {% block sidebar %}{% endblock %}
+                </div>
+                {% endif %}
+
+                <div class="{{ block('sidebar') ? 'col-xs-9' : 'col-xs-12' }}">
+                    {% block body %}{% endblock %}
+                </div>
             </div>
-            {% if block('sidebar') %}
-            <div class="col-xs-3">
-                {% block sidebar %}{% endblock %}
-            </div>
-            {% endif %}
         </div>
     </body>
 </html>

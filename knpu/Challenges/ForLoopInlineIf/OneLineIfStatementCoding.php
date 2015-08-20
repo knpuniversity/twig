@@ -19,7 +19,7 @@ class OneLineIfStatementCoding implements CodingChallengeInterface
         return <<<EOF
 The intern added an if statement that either prints each product's
 quantity or an "out of stock" message. It works great! But I can tell that
-you like a challenge, see if you can write this all in one line, inside a
+you like a challenge: see if you can write this all in one line, inside a
 single `{{ }}` "say something" tag.
 EOF;
     }
@@ -46,9 +46,9 @@ EOF
         );
         $fileBuilder->setEntryPointFilename('fallCollection.twig');
 
-        $fileBuilder->addFileContents(
+        $fileBuilder->addFile(
             'PantsProduct.php',
-            file_get_contents(__DIR__.'/../stubs/PantsProduct.php')
+            __DIR__.'/../stubs/PantsProduct.php'
         );
 
         return $fileBuilder;
@@ -61,6 +61,7 @@ EOF
 
     public function setupContext(CodingContext $context)
     {
+        $context->requireFile('PantsProduct.php');
         $context->addVariable('products', array(
             new \PantsProduct('The Black and Tan Trouser', 50, 0),
             new \PantsProduct('Antarctic Snow Pants (in leopard seal print)', 99, 10),

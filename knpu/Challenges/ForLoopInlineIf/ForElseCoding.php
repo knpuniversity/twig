@@ -18,8 +18,9 @@ class ForElseCoding implements CodingChallengeInterface
     {
         return <<<EOF
 This template works well enough, but it could be easier! Leverage Twig's
-for-else ability to remove the if statement at the bottom. Make sure it still
-prints out 'No pants for you!' in case the inventory is empty.
+for-else ability to remove the if statement at the bottom. We're passing
+in an empty `products` array variable, so make sure that `No pants for you!`
+still prints out since the inventory is empty.
 EOF;
     }
 
@@ -32,9 +33,7 @@ EOF;
     <h3>
         {{ product.name }}
 
-        <span class="price">
-            {{ product.price }}
-        </span>
+        <span class="price">{{ product.price }}</span>
     </h3>
 {% endfor %}
 
@@ -47,11 +46,6 @@ EOF
         );
         $fileBuilder->setEntryPointFilename('fallCollection.twig');
 
-        $fileBuilder->addFileContents(
-            'PantsProduct.php',
-            file_get_contents(__DIR__.'/../stubs/PantsProduct.php')
-        );
-
         return $fileBuilder;
     }
 
@@ -62,18 +56,13 @@ EOF
 
     public function setupContext(CodingContext $context)
     {
-        $context->addVariable('products', array(
-            new \PantsProduct('The Black and Tan Trouser', 50),
-            new \PantsProduct('Antarctic Snow Pants (in leopard seal print)', 99),
-            new \PantsProduct('South Shore Swim Shorts', 49),
-            new \PantsProduct('Starfish Halloween Costume', 35)
-        ));
+        $context->addVariable('products', array());
     }
 
     public function grade(CodingExecutionResult $result)
     {
         $result->assertInputContains('fallCollection.twig', 'else', 'Use an `else` with your `for` tag.');
-        $result->assertOutputContains('No pants for you!');
+        $result->assertInputContains('fallCollection.twig', 'No pants for you!');
         $result->assertInputDoesNotContain('fallCollection.twig', '{% if', 'You don\'t need the `{% if` statement that checks for the products anymore!');
     }
 
@@ -84,15 +73,13 @@ EOF
     <h3>
         {{ product.name }}
 
-        <span class="price">
-            {{ product.price }}
-        </span>
+        <span class="price">{{ product.price }}</span>
     </h3>
 {% else %}
     <div class="alert alert-warning">
         No pants for you!
     </div>
-{% endif %}
+{% endfor %}
 EOF
         );
     }

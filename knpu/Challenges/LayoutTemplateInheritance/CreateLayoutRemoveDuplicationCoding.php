@@ -28,25 +28,16 @@ EOF;
         $fileBuilder = new FileBuilder();
 
         $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <title>Penguins Pants Plus!</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <header>
-            <div class="logo">Penguins Pants Plus!</div>
-        </header>
+        <header>Penguins Pants Plus!</header>
 
-        <h1>
-            {{ fallCollectionTitle }}
-        </h1>
+        <h1>{{ fallCollectionTitle }}</h1>
 
-        <div>
-            The fall products are coming soon!
-        </div>
-
+        <div>The fall products are coming soon!</div>
     </body>
 </html>
 EOF
@@ -54,25 +45,16 @@ EOF
         $fileBuilder->setEntryPointFilename('fallCollection.twig');
 
         $fileBuilder->addFileContents('mainCollection.twig', <<<EOF
-<!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <title>Penguins Pants Plus!</title>
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <header>
-            <div class="logo">Penguins Pants Plus!</div>
-        </header>
+        <header>Penguins Pants Plus!</header>
 
-        <h1>
-            Welcome to our main collection or products
-        </h1>
+        <h1>Welcome to our main collection or products</h1>
 
-        <div>
-            The main products are being updated!
-        </div>
-
+        <div>The main products are being updated!</div>
     </body>
 </html>
 EOF
@@ -115,13 +97,9 @@ EOF
 
 {% block body %}
 
-    <h1>
-        {{ fallCollectionTitle }}
-    </h1>
+    <h1>{{ fallCollectionTitle }}</h1>
 
-    <div>
-        The fall products are coming soon!
-    </div>
+    <div>The fall products are coming soon!</div>
 
 {% endblock %}
 EOF
@@ -132,13 +110,9 @@ EOF
 
 {% block body %}
 
-    <h1>
-        Welcome to our main collection or products
-    </h1>
+    <h1>Welcome to our main collection or products</h1>
 
-    <div>
-        The main products are being updated!
-    </div>
+    <div>The main products are being updated!</div>
 
 {% endblock %}
 EOF
@@ -152,12 +126,9 @@ EOF
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <header>
-            <div class="logo">Penguins Pants Plus!</div>
-        </header>
+        <header>Penguins Pants Plus!</header>
 
         {% block body %}{% endblock %}
-
     </body>
 </html>
 EOF

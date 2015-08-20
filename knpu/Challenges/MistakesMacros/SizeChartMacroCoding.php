@@ -25,7 +25,7 @@ because the fall collection only has the sizes S, M and L.
 Refactor the sizing chart into a macro called `printSizingChart`, put it in `macros.twig`,
 and make sure it has a `showXLColumn` argument that you use to only show XL when we want to.
 Use this macro in both collection templates, making sure not to include the XL column for
-`fallCollection`.twig.
+`fallCollection.twig`.
 EOF;
     }
 
@@ -41,6 +41,7 @@ EOF;
 {% endblock %}
 EOF
         );
+        $fileBuilder->setEntryPointFilename('fallCollection.twig');
 
         $fileBuilder->addFileContents('mainCollection.twig', <<<EOF
 {% extends 'layout.twig' %}
@@ -70,6 +71,22 @@ EOF
 EOF
         );
 
+        $fileBuilder->addFileContents('layout.twig', <<<EOF
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Penguins Pants Plus!</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>Penguins Pants Plus!</header>
+
+        {% block body %}{% endblock %}
+    </body>
+</html>
+EOF
+        );
+
         return $fileBuilder;
     }
 
@@ -85,8 +102,11 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertInputContains('macros.twig', 'printSizingChart(');
-        $result->assertInputContains('macros.twig', 'showXLColumn');
+        $result->assertInputContains('macros.twig', 'printSizingChart(', 'I don\'t see the `printSizingChart` macro in `macros.twig`');
+        $result->assertInputContains('macros.twig', 'showXLColumn', 'I don\'t see the `showXLColumn` argument for the `printSizingChart` macro. Add this and use it to hide/show the XL column.');
+        $result->assertInputContains('fallCollection.twig', 'printSizingChart', 'You\'ll need to use the `printSizingChart` macro inside `fallCollection.twig');
+        $result->assertInputContains('mainCollection.twig', 'printSizingChart', 'You\'ll need to use the `printSizingChart` macro inside `mainCollection.twig');
+        $result->assertInputContains('mainCollection.twig', 'import', 'Don\'t forget to `import` `macros.twig` in `mainCollection.twig`.');
         $result->assertOutputContains('5-15 lbs');
         $result->assertOutputDoesNotContain('61-85 lbs');
     }
@@ -95,7 +115,7 @@ EOF
     {
         $correctAnswer->setFileContents('fallCollection.twig', <<<EOF
 {% extends 'layout.twig' %}
-{% use 'macros.twig' as myMacros %}
+{% import 'macros.twig' as myMacros %}
 
 {% block body %}
     {{ myMacros.printSizingChart(false) }}
@@ -107,7 +127,7 @@ EOF
 
         $correctAnswer->setFileContents('mainCollection.twig', <<<EOF
 {% extends 'layout.twig' %}
-{% use 'macros.twig' as myMacros %}
+{% import 'macros.twig' as myMacros %}
 
 {% block body %}
     {{ myMacros.printSizingChart(true) }}

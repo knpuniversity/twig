@@ -36,11 +36,11 @@ EOF;
 EOF
         );
 
-        $fileBuilder->setEntryPointFilename('fallCollection.twig');
+        $fileBuilder->setEntryPointFilename('singleItem.twig');
 
-        $fileBuilder->addFileContents(
+        $fileBuilder->addFile(
             'PantsProduct.php',
-            file_get_contents(__DIR__.'/../stubs/PantsProduct.php')
+            __DIR__.'/../stubs/PantsProduct.php'
         );
 
         return $fileBuilder;
@@ -53,6 +53,7 @@ EOF
 
     public function setupContext(CodingContext $context)
     {
+        $context->requireFile('PantsProduct.php');
         $product = new \PantsProduct('The Black and Tan Trouser', 50);
         $product->setDescription('The <strong>Hottest</strong> pants this fall!');
         $context->addVariable('product', $product);

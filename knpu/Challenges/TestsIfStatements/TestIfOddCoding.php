@@ -16,7 +16,7 @@ class TestIfOddCoding implements CodingChallengeInterface
         return <<<EOF
 Penguins are very superstitious about odd numbers. If we have an odd number
 of total pants available, print a message that says:
-"We promise, 1 more pair of pants is coming very soon!" to calm their fears.
+`We promise, 1 more pair of pants is coming very soon!` to calm their fears.
 EOF;
     }
 
@@ -29,22 +29,18 @@ EOF;
     <h3>
         {{ product.name }}
 
-        <span class="price">
-            {{ product.price }}
-        </span>
+        <span class="price">{{ product.price }}</span>
     </h3>
 {% endfor %}
 
-{#
-Print your message down here if there are an odd number of pants!
-#}
+{# Print your message down here if there are an odd number of pants! #}
 EOF
         );
         $fileBuilder->setEntryPointFilename('fallCollection.twig');
 
-        $fileBuilder->addFileContents(
+        $fileBuilder->addFile(
             'PantsProduct.php',
-            file_get_contents(__DIR__.'/../stubs/PantsProduct.php')
+            __DIR__.'/../stubs/PantsProduct.php'
         );
 
         return $fileBuilder;
@@ -57,6 +53,8 @@ EOF
 
     public function setupContext(CodingContext $context)
     {
+        $context->requireFile('PantsProduct.php');
+
         $context->addVariable('products', array(
             new \PantsProduct('The Black and Tan Trouser', 50),
             new \PantsProduct('Antarctic Snow Pants (in leopard seal print)', 99),
@@ -78,9 +76,7 @@ EOF
     <h3>
         {{ product.name }}
 
-        <span class="price">
-            {{ product.price }}
-        </span>
+        <span class="price">{{ product.price }}</span>
     </h3>
 {% endfor %}
 

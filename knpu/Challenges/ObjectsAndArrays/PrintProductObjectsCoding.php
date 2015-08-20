@@ -47,9 +47,18 @@ EOF
         );
         $fileBuilder->setEntryPointFilename('fallCollection.twig');
 
-        $fileBuilder->addFileContents(
+        // read this over here, get a list of files to send over
+        // save the "extra" files on the other side, in the directory
+        // -> remap any /../ to avoid leaving the directory
+
+        // set the /../ relative path over here
+        // resolve these to real files, by looping over and opening each one
+        // send the "extra" files over there as a map: '/../stubs/PantsProduct.php' => 'PantsProduct.php'
+        // save the "extra" files on the other side, in the directory, with the "local" filename
+        // resolve each in the builder to real files, by looping over and setting the real path
+        $fileBuilder->addFile(
             'PantsProduct.php',
-            file_get_contents(__DIR__.'/../stubs/PantsProduct.php')
+            __DIR__.'/../stubs/PantsProduct.php'
         );
 
         return $fileBuilder;
@@ -62,6 +71,7 @@ EOF
 
     public function setupContext(CodingContext $context)
     {
+        $context->requireFile('PantsProduct.php');
         $context->addVariable('products', array(
             new \PantsProduct('The Black and Tan Trouser', 50),
             new \PantsProduct('Antarctic Snow Pants (in leopard seal print)', 99),

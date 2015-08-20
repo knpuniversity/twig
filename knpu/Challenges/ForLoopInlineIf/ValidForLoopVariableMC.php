@@ -17,10 +17,10 @@ EOF;
 
     public function configureAnswers(AnswerBuilder $builder)
     {
-        $builder->addAnswer('{% if loop.first %}')
-            ->addAnswer('{{ loop.previous }}', true)
-            ->addAnswer('{{ loop.index0 }}')
-            ->addAnswer('{% if loop.length > 5 %}');
+        $builder->addAnswer('`{% if loop.first %}`')
+            ->addAnswer('`{{ loop.previous }}`', true)
+            ->addAnswer('`{{ loop.index0 }}`')
+            ->addAnswer('`{% if loop.length > 5 %}`');
     }
 
     public function getExplanation()

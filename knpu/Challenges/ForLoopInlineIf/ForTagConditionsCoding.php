@@ -40,9 +40,9 @@ EOF
         );
         $fileBuilder->setEntryPointFilename('fallCollection.twig');
 
-        $fileBuilder->addFileContents(
+        $fileBuilder->addFile(
             'PantsProduct.php',
-            file_get_contents(__DIR__.'/../stubs/PantsProduct.php')
+            __DIR__.'/../stubs/PantsProduct.php'
         );
 
         return $fileBuilder;
@@ -55,6 +55,7 @@ EOF
 
     public function setupContext(CodingContext $context)
     {
+        $context->requireFile('PantsProduct.php');
         $context->addVariable('products', array(
             new \PantsProduct('The Black and Tan Trouser', 50, 0),
             new \PantsProduct('Antarctic Snow Pants (in leopard seal print)', 99, 10),
@@ -65,8 +66,9 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertOutputContains('The Black and Tan Trouser');
-        $result->assertInputDoesNotContain('{% if', 'Hide the products with zero quantity, but without a new `{% if ...` statement: add an "if" part to the `{% for ...` tag.');
+        $result->assertOutputDoesNotContain('The Black and Tan Trouser');
+        $result->assertOutputContains('Starfish Halloween Costume');
+        $result->assertInputDoesNotContain('fallCollection.twig', '{% if', 'Hide the products with zero quantity, but without a new `{% if ...` statement: add an "if" part to the `{% for ...` tag.');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)

@@ -17,7 +17,9 @@ class IncludeMistakeCoding implements CodingChallengeInterface
     public function getQuestion()
     {
         return <<<EOF
-Fix the following code:
+You've been coding like a machine until someone brought birthday cake <i class="fa fa-birthday-cake"></i>
+to the office and you quit working immediately! Now, in a slight sugar-coma,
+you're ready to keep working. Start by fixing the error in this template:
 EOF;
     }
 
