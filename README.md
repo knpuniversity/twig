@@ -16,4 +16,28 @@ Well hallo there! Inside this archive, you'll find 3 things:
 And as always, thanks so much for your support and letting us do what
 we love!
 
-<3 Your friends at KnpLabs
+<3 Your friends at KnpUniversity
+
+How do I run the Project
+------------------------
+
+Oh, so you want to code locally? Awesome! Let's assume you want to get the
+`start` code working locally:
+
+1. Download the code (since you're reading this, done!). You can download it
+   *anywhere* on your system.
+
+2. Open up a terminal, and move into the `start` directory. For example, maybe
+   on OSX, you might need to say:
+
+```
+cd ~/Downloads/knpuniversity-twig-xxxx/start
+```
+
+3. Use PHP's built-in web server to run our app. So, run this from the terminal:
+
+```
+php -S localhost:8000
+```
+
+4. Put http://localhost:8000 in your browser. You should see the app!
