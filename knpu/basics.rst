@@ -10,6 +10,11 @@ To make this interesting, let's build something useful with Twig like a penguin
 clothing store! Actually, I've already got us started. I have a small website
 setup under my web server's document root and a test page called ``test.php``.
 
+.. tip::
+
+    Want to run this code locally? Download the code from this page, then following
+    the directions in the `README.md` file inside.
+
 Right now, this file prepares some ``pageTitle`` and ``products`` variables
 and then includes another file::
 
