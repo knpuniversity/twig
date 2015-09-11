@@ -40,4 +40,7 @@ cd ~/Downloads/knpuniversity-twig-xxxx/start
 php -S localhost:8000
 ```
 
-4. Put http://localhost:8000 in your browser. You should see the app!
+4. Put `http://localhost:8000/test.php` in your browser. You should see the app!
+
+Soon (in the first chapter), we'll make some changes, and you'll eventually change
+your URL to go to just `http://localhost:8000`.
