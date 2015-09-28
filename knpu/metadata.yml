@@ -24,53 +24,53 @@ videoDownloadExtension: mov
 chapters:
     basics:
         is_free:    true
-        video_key:  lc2wt3p3ub
+        video_key:  140192811
         challenges:
             - Challenges\Basics\PrintVariableCoding
             - Challenges\Basics\ForLoopCoding
             - Challenges\Basics\IncorrectOpenTagsMC
     "functions-filters":
-        video_key:  4zmj1h0ulk
+        video_key:  140192813
         challenges:
             - Challenges\FunctionsFilters\DateFilterCoding
             - Challenges\FunctionsFilters\RandomFunctionWithFilterCoding
             - Challenges\FunctionsFilters\DumpFindVariableCoding
     "objects-and-arrays":
-        video_key:  yh82ku3f00
+        video_key:  140192817
         challenges:
             - Challenges\ObjectsAndArrays\PrintRandomArrayKeyCoding
             - Challenges\ObjectsAndArrays\PrintProductObjectsCoding
     "layout-template-inheritance":
-        video_key:  94ro995kta
+        video_key:  140192814
         challenges:
             - Challenges\LayoutTemplateInheritance\CreateLayoutRemoveDuplicationCoding
             - Challenges\LayoutTemplateInheritance\FixExtendsErrorCoding
             - Challenges\LayoutTemplateInheritance\AddBlockAndOverrideCoding
     "including-other-templates":
-        video_key:  li7kbkngrj
+        video_key:  140192816
         challenges:
             - Challenges\IncludingOtherTemplates\UseIncludeCoding
             - Challenges\IncludingOtherTemplates\IncludeAndVariablesMC
     "tests-if-statements":
-        video_key:  nry8brykdc
+        video_key:  140192815
         challenges:
             - Challenges\TestsIfStatements\TestIfOddCoding
             - Challenges\TestsIfStatements\ComplexTestAndNotCoding
     "for-loop-inline-if":
-        video_key:  0mxtp3srvz
+        video_key:  140192821
         challenges:
             - Challenges\ForLoopInlineIf\ValidForLoopVariableMC
             - Challenges\ForLoopInlineIf\ForElseCoding
             - Challenges\ForLoopInlineIf\OneLineIfStatementCoding
             - Challenges\ForLoopInlineIf\ForTagConditionsCoding
     "mistakes-macros":
-        video_key:  os1xausx5k
+        video_key:  140192820
         challenges:
             - Challenges\MistakesMacros\IncludeMistakeCoding
             - Challenges\MistakesMacros\BlankVariableErrorMC
             - Challenges\MistakesMacros\SizeChartMacroCoding
     "extra-credit-tricks-escaping":
-        video_key:  h08qcp0agi
+        video_key:  140192822
         challenges:
             - Challenges\ExtraCreditEscaping\SideBarBlockCoding
             - Challenges\ExtraCreditEscaping\BadTwigCodeMC
