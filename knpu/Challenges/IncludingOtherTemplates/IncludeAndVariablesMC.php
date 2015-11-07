@@ -2,8 +2,8 @@
 
 namespace Challenges\IncludingOtherTemplates;
 
-use KnpU\ActivityRunner\Activity\MultipleChoice\AnswerBuilder;
-use KnpU\ActivityRunner\Activity\MultipleChoiceChallengeInterface;
+use KnpU\Gladiator\MultipleChoice\AnswerBuilder;
+use KnpU\Gladiator\MultipleChoiceChallengeInterface;
 
 class IncludeAndVariablesMC implements MultipleChoiceChallengeInterface
 {
