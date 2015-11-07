@@ -2,12 +2,14 @@
 
 namespace Challenges\MistakesMacros;
 
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
-use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
-use KnpU\ActivityRunner\Activity\Exception\GradingException;
-use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+use KnpU\Gladiator\CodingChallenge\ChallengeBuilder;
+use KnpU\Gladiator\CodingChallenge\Exception\GradingException;
+use KnpU\Gladiator\CodingChallenge\CodingContext;
+use KnpU\Gladiator\CodingChallenge\CorrectAnswer;
+use KnpU\Gladiator\CodingChallengeInterface;
+use KnpU\Gladiator\CodingChallenge\CodingExecutionResult;
+use KnpU\Gladiator\Grading\HtmlOutputGradingTool;
+use KnpU\Gladiator\Worker\WorkerLoaderInterface;
 
 class IncludeMistakeCoding implements CodingChallengeInterface
 {
@@ -23,9 +25,9 @@ you're ready to keep working. Start by fixing the error in this template:
 EOF;
     }
 
-    public function getFileBuilder()
+    public function getChallengeBuilder()
     {
-        $fileBuilder = new FileBuilder();
+        $fileBuilder = new ChallengeBuilder();
 
         $fileBuilder->addFileContents('aboutPenguins.twig', <<<EOF
 {{ include('_cannotFly.twig', reason: 'little wings') }}
@@ -43,9 +45,9 @@ EOF
         return $fileBuilder;
     }
 
-    public function getExecutionMode()
+    public function getWorkerConfig(WorkerLoaderInterface $loader)
     {
-        return self::EXECUTION_MODE_TWIG_NORMAL;
+        return $loader->load(__DIR__.'/../twig_worker.yml');
     }
 
     public function setupContext(CodingContext $context)
@@ -55,7 +57,9 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertOutputContains('due to: little wings');
+        $htmlGrader = new HtmlOutputGradingTool($result);
+
+        $htmlGrader->assertOutputContains('due to: little wings');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)

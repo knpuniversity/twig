@@ -2,12 +2,15 @@
 
 namespace Challenges\LayoutTemplateInheritance;
 
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
-use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
-use KnpU\ActivityRunner\Activity\Exception\GradingException;
-use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+use KnpU\Gladiator\CodingChallenge\ChallengeBuilder;
+use KnpU\Gladiator\CodingChallenge\Exception\GradingException;
+use KnpU\Gladiator\CodingChallenge\CodingContext;
+use KnpU\Gladiator\CodingChallenge\CorrectAnswer;
+use KnpU\Gladiator\CodingChallengeInterface;
+use KnpU\Gladiator\CodingChallenge\CodingExecutionResult;
+use KnpU\Gladiator\Grading\HtmlOutputGradingTool;
+use KnpU\Gladiator\Grading\PhpGradingTool;
+use KnpU\Gladiator\Worker\WorkerLoaderInterface;
 
 class AddBlockAndOverrideCoding implements CodingChallengeInterface
 {
@@ -25,9 +28,9 @@ a penguin!` is still the default tag line, for all the other templates that
 EOF;
     }
 
-    public function getFileBuilder()
+    public function getChallengeBuilder()
     {
-        $fileBuilder = new FileBuilder();
+        $fileBuilder = new ChallengeBuilder();
 
         $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
 {% extends 'layout.twig' %}
@@ -65,9 +68,9 @@ EOF
         return $fileBuilder;
     }
 
-    public function getExecutionMode()
+    public function getWorkerConfig(WorkerLoaderInterface $loader)
     {
-        return self::EXECUTION_MODE_TWIG_NORMAL;
+        return $loader->load(__DIR__.'/../twig_worker.yml');
     }
 
     public function setupContext(CodingContext $context)
@@ -77,11 +80,14 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertOutputContains('Winter is coming! Get your pants!');
-        $result->assertElementContains('footer', 'Winter is coming! Get your pants!', 'It looks like the `<footer>` HTML tag is gone. Print the text inside of this tag');
-        $result->assertInputDoesNotContain('fallCollection.twig', '<footer>', 'You don\'t need to have the `<footer>` tag inside of `fallCollection.twig`. Instead, only put this `layout.twig`, and make your block only override the contents *inside* of it');
+        $normalGrader = new PhpGradingTool($result);
+        $htmlGrader = new HtmlOutputGradingTool($result);
 
-        $result->assertInputContains('layout.twig', 'You\'re hip, you\'re cool, you\'re a penguin!', 'Oh no! The original caption - `You\'re hip, you\'re cool, you\'re a penguin!` will now be missing from every other template that does *not* override the block. Make this be the default footer content.');
+        $htmlGrader->assertOutputContains('Winter is coming! Get your pants!');
+        $htmlGrader->assertElementContains('footer', 'Winter is coming! Get your pants!', 'It looks like the `<footer>` HTML tag is gone. Print the text inside of this tag');
+        $normalGrader->assertInputDoesNotContain('fallCollection.twig', '<footer>', 'You don\'t need to have the `<footer>` tag inside of `fallCollection.twig`. Instead, only put this `layout.twig`, and make your block only override the contents *inside* of it');
+
+        $normalGrader->assertInputContains('layout.twig', 'You\'re hip, you\'re cool, you\'re a penguin!', 'Oh no! The original caption - `You\'re hip, you\'re cool, you\'re a penguin!` will now be missing from every other template that does *not* override the block. Make this be the default footer content.');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)

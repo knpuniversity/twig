@@ -2,12 +2,14 @@
 
 namespace Challenges\TestsIfStatements;
 
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
-use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
-use KnpU\ActivityRunner\Activity\Exception\GradingException;
-use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+use KnpU\Gladiator\CodingChallenge\ChallengeBuilder;
+use KnpU\Gladiator\CodingChallenge\Exception\GradingException;
+use KnpU\Gladiator\CodingChallenge\CodingContext;
+use KnpU\Gladiator\CodingChallenge\CorrectAnswer;
+use KnpU\Gladiator\CodingChallengeInterface;
+use KnpU\Gladiator\CodingChallenge\CodingExecutionResult;
+use KnpU\Gladiator\Grading\PhpGradingTool;
+use KnpU\Gladiator\Worker\WorkerLoaderInterface;
 
 class ComplexTestAndNotCoding implements CodingChallengeInterface
 {
@@ -26,9 +28,9 @@ But you can test your logic by passing a `quantityRemaining` variable in your
 EOF;
     }
 
-    public function getFileBuilder()
+    public function getChallengeBuilder()
     {
-        $fileBuilder = new FileBuilder();
+        $fileBuilder = new ChallengeBuilder();
 
         $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
 {{ include('_featuredProduct.twig') }}
@@ -52,9 +54,9 @@ EOF
         return $fileBuilder;
     }
 
-    public function getExecutionMode()
+    public function getWorkerConfig(WorkerLoaderInterface $loader)
     {
-        return self::EXECUTION_MODE_TWIG_NORMAL;
+        return $loader->load(__DIR__.'/../twig_worker.yml');
     }
 
     public function setupContext(CodingContext $context)
@@ -63,8 +65,10 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertInputContains('_featuredProduct.twig', 'defined', 'Use the `defined` filter to see if `quantityRemaining` is defined');
-        $result->assertInputContains('_featuredProduct.twig', 'is not odd', 'Use `is not odd` to make sure `quantityRemaining` is not an odd number. (Hint: you could also use `is even` in real life... but not to pass this challenge)');
+        $normalGrader = new PhpGradingTool($result);
+
+        $normalGrader->assertInputContains('_featuredProduct.twig', 'defined', 'Use the `defined` filter to see if `quantityRemaining` is defined');
+        $normalGrader->assertInputContains('_featuredProduct.twig', 'is not odd', 'Use `is not odd` to make sure `quantityRemaining` is not an odd number. (Hint: you could also use `is even` in real life... but not to pass this challenge)');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)

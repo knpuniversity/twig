@@ -2,12 +2,15 @@
 
 namespace Challenges\IncludingOtherTemplates;
 
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
-use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
-use KnpU\ActivityRunner\Activity\Exception\GradingException;
-use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+use KnpU\Gladiator\CodingChallenge\ChallengeBuilder;
+use KnpU\Gladiator\CodingChallenge\Exception\GradingException;
+use KnpU\Gladiator\CodingChallenge\CodingContext;
+use KnpU\Gladiator\CodingChallenge\CorrectAnswer;
+use KnpU\Gladiator\CodingChallengeInterface;
+use KnpU\Gladiator\CodingChallenge\CodingExecutionResult;
+use KnpU\Gladiator\Grading\HtmlOutputGradingTool;
+use KnpU\Gladiator\Grading\PhpGradingTool;
+use KnpU\Gladiator\Worker\WorkerLoaderInterface;
 
 class UseIncludeCoding implements CodingChallengeInterface
 {
@@ -20,9 +23,9 @@ including this from both templates.
 EOF;
     }
 
-    public function getFileBuilder()
+    public function getChallengeBuilder()
     {
-        $fileBuilder = new FileBuilder();
+        $fileBuilder = new ChallengeBuilder();
 
         $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
 {% extends 'layout.twig' %}
@@ -82,9 +85,9 @@ EOF
         return $fileBuilder;
     }
 
-    public function getExecutionMode()
+    public function getWorkerConfig(WorkerLoaderInterface $loader)
     {
-        return self::EXECUTION_MODE_TWIG_NORMAL;
+        return $loader->load(__DIR__.'/../twig_worker.yml');
     }
 
     public function setupContext(CodingContext $context)
@@ -94,11 +97,14 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertOutputContains('pin-striped full suit');
-        $result->assertInputContains('fallCollection.twig', 'include');
-        $result->assertInputContains('_featuredProduct.twig', 'pin-striped full suit');
-        $result->assertInputDoesNotContain('fallCollection.twig', 'pin-striped full suit', 'Now that you\'re including `_featuredProduct.twig`, you should remove the "pin-striped full suit" text from `fallCollection.twig`');
-        $result->assertInputContains('mainCollection.twig', 'include');
+        $normalGrader = new PhpGradingTool($result);
+        $htmlGrader = new HtmlOutputGradingTool($result);
+
+        $htmlGrader->assertOutputContains('pin-striped full suit');
+        $normalGrader->assertInputContains('fallCollection.twig', 'include');
+        $normalGrader->assertInputContains('_featuredProduct.twig', 'pin-striped full suit');
+        $normalGrader->assertInputDoesNotContain('fallCollection.twig', 'pin-striped full suit', 'Now that you\'re including `_featuredProduct.twig`, you should remove the "pin-striped full suit" text from `fallCollection.twig`');
+        $normalGrader->assertInputContains('mainCollection.twig', 'include');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)

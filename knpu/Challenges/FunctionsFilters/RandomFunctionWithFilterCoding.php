@@ -2,12 +2,15 @@
 
 namespace Challenges\FunctionsFilters;
 
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
-use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
-use KnpU\ActivityRunner\Activity\Exception\GradingException;
-use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+use KnpU\Gladiator\CodingChallenge\ChallengeBuilder;
+use KnpU\Gladiator\CodingChallenge\Exception\GradingException;
+use KnpU\Gladiator\CodingChallenge\CodingContext;
+use KnpU\Gladiator\CodingChallenge\CorrectAnswer;
+use KnpU\Gladiator\CodingChallengeInterface;
+use KnpU\Gladiator\CodingChallenge\CodingExecutionResult;
+use KnpU\Gladiator\Grading\HtmlOutputGradingTool;
+use KnpU\Gladiator\Grading\PhpGradingTool;
+use KnpU\Gladiator\Worker\WorkerLoaderInterface;
 
 class RandomFunctionWithFilterCoding implements CodingChallengeInterface
 {
@@ -25,9 +28,9 @@ this page SHOUT.
 EOF;
     }
 
-    public function getFileBuilder()
+    public function getChallengeBuilder()
     {
-        $fileBuilder = new FileBuilder();
+        $fileBuilder = new ChallengeBuilder();
 
         $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
 <table>
@@ -53,9 +56,9 @@ EOF
         return $fileBuilder;
     }
 
-    public function getExecutionMode()
+    public function getWorkerConfig(WorkerLoaderInterface $loader)
     {
-        return self::EXECUTION_MODE_TWIG_NORMAL;
+        return $loader->load(__DIR__.'/../twig_worker.yml');
     }
 
     public function setupContext(CodingContext $context)
@@ -70,15 +73,18 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertInputContains('fallCollection.twig', 'random(', 'Are you using the random() function?');
-        $result->assertInputContains('fallCollection.twig', 'upper', 'Don\'t forget to use the `upper` filter to uppercase the colors!');
-        $result->assertInputContains('fallCollection.twig', 'black', 'Use `black` (lowercase) as one of the random colors', true);
-        $result->assertInputContains('fallCollection.twig', 'white', 'Use `black` (lowercase) as one of the random colors', true);
-        $result->assertInputContains('fallCollection.twig', 'green', 'Use `black` (lowercase) as one of the random colors', true);
+        $normalGrader = new PhpGradingTool($result);
+        $htmlGrader = new HtmlOutputGradingTool($result);
 
-        if (!$result->doesOutputContain('BLACK', true)
-            && !$result->doesOutputContain('WHITE', true)
-            && !$result->doesOutputContain('GREEN', true)
+        $normalGrader->assertInputContains('fallCollection.twig', 'random(', 'Are you using the random() function?');
+        $normalGrader->assertInputContains('fallCollection.twig', 'upper', 'Don\'t forget to use the `upper` filter to uppercase the colors!');
+        $normalGrader->assertInputContains('fallCollection.twig', 'black', 'Use `black` (lowercase) as one of the random colors', true);
+        $normalGrader->assertInputContains('fallCollection.twig', 'white', 'Use `black` (lowercase) as one of the random colors', true);
+        $normalGrader->assertInputContains('fallCollection.twig', 'green', 'Use `black` (lowercase) as one of the random colors', true);
+
+        if (!$htmlGrader->doesOutputContain('BLACK', true)
+            && !$htmlGrader->doesOutputContain('WHITE', true)
+            && !$htmlGrader->doesOutputContain('GREEN', true)
         ) {
             throw new GradingException('The output does not contain any of the colors BLACK, GREEN or WHITE - are you randomly selecting one of these and uppercasing them?');
         }

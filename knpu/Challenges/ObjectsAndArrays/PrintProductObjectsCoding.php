@@ -2,12 +2,15 @@
 
 namespace Challenges\ObjectsAndArrays;
 
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
-use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
-use KnpU\ActivityRunner\Activity\Exception\GradingException;
-use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+use KnpU\Gladiator\CodingChallenge\ChallengeBuilder;
+use KnpU\Gladiator\CodingChallenge\Exception\GradingException;
+use KnpU\Gladiator\CodingChallenge\CodingContext;
+use KnpU\Gladiator\CodingChallenge\CorrectAnswer;
+use KnpU\Gladiator\CodingChallengeInterface;
+use KnpU\Gladiator\CodingChallenge\CodingExecutionResult;
+use KnpU\Gladiator\Grading\HtmlOutputGradingTool;
+use KnpU\Gladiator\Grading\PhpGradingTool;
+use KnpU\Gladiator\Worker\WorkerLoaderInterface;
 
 class PrintProductObjectsCoding implements CodingChallengeInterface
 {
@@ -24,9 +27,9 @@ be released.
 EOF;
     }
 
-    public function getFileBuilder()
+    public function getChallengeBuilder()
     {
-        $fileBuilder = new FileBuilder();
+        $fileBuilder = new ChallengeBuilder();
 
         $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
 {% for product in products %}
@@ -64,9 +67,9 @@ EOF
         return $fileBuilder;
     }
 
-    public function getExecutionMode()
+    public function getWorkerConfig(WorkerLoaderInterface $loader)
     {
-        return self::EXECUTION_MODE_TWIG_NORMAL;
+        return $loader->load(__DIR__.'/../twig_worker.yml');
     }
 
     public function setupContext(CodingContext $context)
@@ -82,10 +85,13 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertOutputContains('The Black and Tan Trouser', 'Are you printing the product names?');
-        $result->assertOutputContains(99, 'Are you printing the product prices?');
-        $result->assertInputContains('fallCollection.twig', 'product.name', 'You can just use `product.name` to print the name. Behind the scenes. Twig calls the `getName()` function on `PantsProduct`.');
-        $result->assertInputContains('fallCollection.twig', 'product.price', 'You can just use `product.price` to print the price. Behind the scenes. Twig calls the `getPrice()` function on `PantsProduct`.');
+        $normalGrader = new PhpGradingTool($result);
+        $htmlGrader = new HtmlOutputGradingTool($result);
+
+        $htmlGrader->assertOutputContains('The Black and Tan Trouser', 'Are you printing the product names?');
+        $htmlGrader->assertOutputContains(99, 'Are you printing the product prices?');
+        $normalGrader->assertInputContains('fallCollection.twig', 'product.name', 'You can just use `product.name` to print the name. Behind the scenes. Twig calls the `getName()` function on `PantsProduct`.');
+        $normalGrader->assertInputContains('fallCollection.twig', 'product.price', 'You can just use `product.price` to print the price. Behind the scenes. Twig calls the `getPrice()` function on `PantsProduct`.');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)

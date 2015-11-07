@@ -2,12 +2,15 @@
 
 namespace Challenges\LayoutTemplateInheritance;
 
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
-use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
-use KnpU\ActivityRunner\Activity\Exception\GradingException;
-use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+use KnpU\Gladiator\CodingChallenge\ChallengeBuilder;
+use KnpU\Gladiator\CodingChallenge\Exception\GradingException;
+use KnpU\Gladiator\CodingChallenge\CodingContext;
+use KnpU\Gladiator\CodingChallenge\CorrectAnswer;
+use KnpU\Gladiator\CodingChallengeInterface;
+use KnpU\Gladiator\CodingChallenge\CodingExecutionResult;
+use KnpU\Gladiator\Grading\HtmlOutputGradingTool;
+use KnpU\Gladiator\Grading\PhpGradingTool;
+use KnpU\Gladiator\Worker\WorkerLoaderInterface;
 
 class CreateLayoutRemoveDuplicationCoding implements CodingChallengeInterface
 {
@@ -23,9 +26,9 @@ fly.
 EOF;
     }
 
-    public function getFileBuilder()
+    public function getChallengeBuilder()
     {
-        $fileBuilder = new FileBuilder();
+        $fileBuilder = new ChallengeBuilder();
 
         $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
 <html>
@@ -65,9 +68,9 @@ EOF
         return $fileBuilder;
     }
 
-    public function getExecutionMode()
+    public function getWorkerConfig(WorkerLoaderInterface $loader)
     {
-        return self::EXECUTION_MODE_TWIG_NORMAL;
+        return $loader->load(__DIR__.'/../twig_worker.yml');
     }
 
     public function setupContext(CodingContext $context)
@@ -77,17 +80,20 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertInputContains('fallCollection.twig', 'extends', '`fallCollection.twig` needs to "extend" `layout.twig`');
-        $result->assertInputContains('fallCollection.twig', 'layout.twig', '`fallCollection.twig` needs to "extend" `layout.twig`');
-        $result->assertInputContains('mainCollection.twig', 'extends', '`mainCollection.twig` needs to "extend" `layout.twig`');
-        $result->assertInputContains('mainCollection.twig', 'layout.twig', '`mainCollection.twig` needs to "extend" `layout.twig`');
+        $normalGrader = new PhpGradingTool($result);
+        $htmlGrader = new HtmlOutputGradingTool($result);
 
-        $result->assertInputContains('layout.twig', '<html', 'Put the entire HTML layout into `layout.twig`');
-        $result->assertInputContains('layout.twig', '</html>', 'Put the entire HTML layout into `layout.twig`');
-        $result->assertInputContains('layout.twig', '<header>', 'The `<header>` belongs in `layout.twig` too, since it\'s repeated on both pages');
+        $normalGrader->assertInputContains('fallCollection.twig', 'extends', '`fallCollection.twig` needs to "extend" `layout.twig`');
+        $normalGrader->assertInputContains('fallCollection.twig', 'layout.twig', '`fallCollection.twig` needs to "extend" `layout.twig`');
+        $normalGrader->assertInputContains('mainCollection.twig', 'extends', '`mainCollection.twig` needs to "extend" `layout.twig`');
+        $normalGrader->assertInputContains('mainCollection.twig', 'layout.twig', '`mainCollection.twig` needs to "extend" `layout.twig`');
 
-        $result->assertInputDoesNotContain('fallCollection.twig', '<html', 'You no longer need the HTML layout (e.g. the `<html>` tag) inside of `fallCollection.twig`');
-        $result->assertOutputContains('The fall products are coming soon!');
+        $normalGrader->assertInputContains('layout.twig', '<html', 'Put the entire HTML layout into `layout.twig`');
+        $normalGrader->assertInputContains('layout.twig', '</html>', 'Put the entire HTML layout into `layout.twig`');
+        $normalGrader->assertInputContains('layout.twig', '<header>', 'The `<header>` belongs in `layout.twig` too, since it\'s repeated on both pages');
+
+        $normalGrader->assertInputDoesNotContain('fallCollection.twig', '<html', 'You no longer need the HTML layout (e.g. the `<html>` tag) inside of `fallCollection.twig`');
+        $htmlGrader->assertOutputContains('The fall products are coming soon!');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)

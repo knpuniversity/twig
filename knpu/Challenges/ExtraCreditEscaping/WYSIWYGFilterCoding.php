@@ -2,12 +2,15 @@
 
 namespace Challenges\ExtraCreditEscaping;
 
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
-use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
-use KnpU\ActivityRunner\Activity\Exception\GradingException;
-use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+use KnpU\Gladiator\CodingChallenge\ChallengeBuilder;
+use KnpU\Gladiator\CodingChallenge\Exception\GradingException;
+use KnpU\Gladiator\CodingChallenge\CodingContext;
+use KnpU\Gladiator\CodingChallenge\CorrectAnswer;
+use KnpU\Gladiator\CodingChallengeInterface;
+use KnpU\Gladiator\CodingChallenge\CodingExecutionResult;
+use KnpU\Gladiator\Grading\HtmlOutputGradingTool;
+use KnpU\Gladiator\Grading\PhpGradingTool;
+use KnpU\Gladiator\Worker\WorkerLoaderInterface;
 
 class WYSIWYGFilterCoding implements CodingChallengeInterface
 {
@@ -23,9 +26,9 @@ of being rendered! Add a filter to save the day.
 EOF;
     }
 
-    public function getFileBuilder()
+    public function getChallengeBuilder()
     {
-        $fileBuilder = new FileBuilder();
+        $fileBuilder = new ChallengeBuilder();
 
         $fileBuilder->addFileContents('singleItem.twig', <<<EOF
 <h1>{{ product.name }}</h1>
@@ -46,9 +49,9 @@ EOF
         return $fileBuilder;
     }
 
-    public function getExecutionMode()
+    public function getWorkerConfig(WorkerLoaderInterface $loader)
     {
-        return self::EXECUTION_MODE_TWIG_NORMAL;
+        return $loader->load(__DIR__.'/../twig_worker.yml');
     }
 
     public function setupContext(CodingContext $context)
@@ -61,8 +64,11 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertOutputContains('<strong>', 'The `<strong>` tag still looks escaped - how can you make it raw?');
-        $result->assertInputContains('singleItem.twig', 'raw', 'Use the `raw` filter to *not* escape HTML tags');
+        $normalGrader = new PhpGradingTool($result);
+        $htmlGrader = new HtmlOutputGradingTool($result);
+
+        $htmlGrader->assertOutputContains('<strong>', 'The `<strong>` tag still looks escaped - how can you make it raw?');
+        $normalGrader->assertInputContains('singleItem.twig', 'raw', 'Use the `raw` filter to *not* escape HTML tags');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)

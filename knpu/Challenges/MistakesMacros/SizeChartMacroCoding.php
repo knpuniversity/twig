@@ -2,12 +2,15 @@
 
 namespace Challenges\MistakesMacros;
 
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
-use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
-use KnpU\ActivityRunner\Activity\Exception\GradingException;
-use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+use KnpU\Gladiator\CodingChallenge\ChallengeBuilder;
+use KnpU\Gladiator\CodingChallenge\Exception\GradingException;
+use KnpU\Gladiator\CodingChallenge\CodingContext;
+use KnpU\Gladiator\CodingChallenge\CorrectAnswer;
+use KnpU\Gladiator\CodingChallengeInterface;
+use KnpU\Gladiator\CodingChallenge\CodingExecutionResult;
+use KnpU\Gladiator\Grading\HtmlOutputGradingTool;
+use KnpU\Gladiator\Grading\PhpGradingTool;
+use KnpU\Gladiator\Worker\WorkerLoaderInterface;
 
 class SizeChartMacroCoding implements CodingChallengeInterface
 {
@@ -29,9 +32,9 @@ Use this macro in both collection templates, making sure not to include the XL c
 EOF;
     }
 
-    public function getFileBuilder()
+    public function getChallengeBuilder()
     {
-        $fileBuilder = new FileBuilder();
+        $fileBuilder = new ChallengeBuilder();
 
         $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
 {% extends 'layout.twig' %}
@@ -90,9 +93,9 @@ EOF
         return $fileBuilder;
     }
 
-    public function getExecutionMode()
+    public function getWorkerConfig(WorkerLoaderInterface $loader)
     {
-        return self::EXECUTION_MODE_TWIG_NORMAL;
+        return $loader->load(__DIR__.'/../twig_worker.yml');
     }
 
     public function setupContext(CodingContext $context)
@@ -102,13 +105,16 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertInputContains('macros.twig', 'printSizingChart(', 'I don\'t see the `printSizingChart` macro in `macros.twig`');
-        $result->assertInputContains('macros.twig', 'showXLColumn', 'I don\'t see the `showXLColumn` argument for the `printSizingChart` macro. Add this and use it to hide/show the XL column.');
-        $result->assertInputContains('fallCollection.twig', 'printSizingChart', 'You\'ll need to use the `printSizingChart` macro inside `fallCollection.twig');
-        $result->assertInputContains('mainCollection.twig', 'printSizingChart', 'You\'ll need to use the `printSizingChart` macro inside `mainCollection.twig');
-        $result->assertInputContains('mainCollection.twig', 'import', 'Don\'t forget to `import` `macros.twig` in `mainCollection.twig`.');
-        $result->assertOutputContains('5-15 lbs');
-        $result->assertOutputDoesNotContain('61-85 lbs');
+        $normalGrader = new PhpGradingTool($result);
+        $htmlGrader = new HtmlOutputGradingTool($result);
+
+        $normalGrader->assertInputContains('macros.twig', 'printSizingChart(', 'I don\'t see the `printSizingChart` macro in `macros.twig`');
+        $normalGrader->assertInputContains('macros.twig', 'showXLColumn', 'I don\'t see the `showXLColumn` argument for the `printSizingChart` macro. Add this and use it to hide/show the XL column.');
+        $normalGrader->assertInputContains('fallCollection.twig', 'printSizingChart', 'You\'ll need to use the `printSizingChart` macro inside `fallCollection.twig');
+        $normalGrader->assertInputContains('mainCollection.twig', 'printSizingChart', 'You\'ll need to use the `printSizingChart` macro inside `mainCollection.twig');
+        $normalGrader->assertInputContains('mainCollection.twig', 'import', 'Don\'t forget to `import` `macros.twig` in `mainCollection.twig`.');
+        $htmlGrader->assertOutputContains('5-15 lbs');
+        $htmlGrader->assertOutputDoesNotContain('61-85 lbs');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)

@@ -2,12 +2,15 @@
 
 namespace Challenges\ExtraCreditEscaping;
 
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingContext;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CorrectAnswer;
-use KnpU\ActivityRunner\Activity\CodingChallengeInterface;
-use KnpU\ActivityRunner\Activity\CodingChallenge\CodingExecutionResult;
-use KnpU\ActivityRunner\Activity\Exception\GradingException;
-use KnpU\ActivityRunner\Activity\CodingChallenge\FileBuilder;
+use KnpU\Gladiator\CodingChallenge\ChallengeBuilder;
+use KnpU\Gladiator\CodingChallenge\Exception\GradingException;
+use KnpU\Gladiator\CodingChallenge\CodingContext;
+use KnpU\Gladiator\CodingChallenge\CorrectAnswer;
+use KnpU\Gladiator\CodingChallengeInterface;
+use KnpU\Gladiator\CodingChallenge\CodingExecutionResult;
+use KnpU\Gladiator\Grading\HtmlOutputGradingTool;
+use KnpU\Gladiator\Grading\PhpGradingTool;
+use KnpU\Gladiator\Worker\WorkerLoaderInterface;
 
 class SideBarBlockCoding implements CodingChallengeInterface
 {
@@ -32,9 +35,9 @@ so it takes up the full-width of the page.
 EOF;
     }
 
-    public function getFileBuilder()
+    public function getChallengeBuilder()
     {
-        $fileBuilder = new FileBuilder();
+        $fileBuilder = new ChallengeBuilder();
 
         $fileBuilder->addFileContents('fallCollection.twig', <<<EOF
 {% extends 'layout.twig' %}
@@ -70,9 +73,9 @@ EOF
         return $fileBuilder;
     }
 
-    public function getExecutionMode()
+    public function getWorkerConfig(WorkerLoaderInterface $loader)
     {
-        return self::EXECUTION_MODE_TWIG_NORMAL;
+        return $loader->load(__DIR__.'/../twig_worker.yml');
     }
 
     public function setupContext(CodingContext $context)
@@ -82,9 +85,12 @@ EOF
 
     public function grade(CodingExecutionResult $result)
     {
-        $result->assertInputContains('layout.twig', 'block(', 'Use the `block(\'sidebar\') function to determine if the child template has any sidebar content');
-        $result->assertOutputDoesNotContain('col-xs-3', 'Make sure the `.col-xs-3` element does not print at all, since there is no sidebar on this page.');
-        $result->assertOutputContains('col-xs-12', 'Change the main content div\'s class to be `col-xs-9` when there is no sidebar content.');
+        $normalGrader = new PhpGradingTool($result);
+        $htmlGrader = new HtmlOutputGradingTool($result);
+
+        $normalGrader->assertInputContains('layout.twig', 'block(', 'Use the `block(\'sidebar\') function to determine if the child template has any sidebar content');
+        $htmlGrader->assertOutputDoesNotContain('col-xs-3', 'Make sure the `.col-xs-3` element does not print at all, since there is no sidebar on this page.');
+        $htmlGrader->assertOutputContains('col-xs-12', 'Change the main content div\'s class to be `col-xs-9` when there is no sidebar content.');
     }
 
     public function configureCorrectAnswer(CorrectAnswer $correctAnswer)
