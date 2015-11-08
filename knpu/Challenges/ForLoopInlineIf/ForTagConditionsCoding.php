@@ -73,7 +73,7 @@ EOF
         $htmlGrader = new HtmlOutputGradingTool($result);
 
         $htmlGrader->assertOutputDoesNotContain('The Black and Tan Trouser');
-        $normalGrader->assertOutputContains('Starfish Halloween Costume');
+        $htmlGrader->assertOutputContains('Starfish Halloween Costume');
         $normalGrader->assertInputDoesNotContain('fallCollection.twig', '{% if', 'Hide the products with zero quantity, but without a new `{% if ...` statement: add an "if" part to the `{% for ...` tag.');
     }
 
