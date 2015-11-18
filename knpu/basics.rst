@@ -193,7 +193,7 @@ how you "speak" in Twig.
 
 .. _`twig-do-something-syntax`:
 
-The "Do Something" Syntax: {{ ... }}
+The "Do Something" Syntax: {% ... %}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The curly-percent (``{%``) is the other syntax, which I call the "do something"
