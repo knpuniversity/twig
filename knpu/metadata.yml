@@ -26,52 +26,52 @@ chapters:
         is_free:    true
         video_key:  140192811
         challenges:
-            - Challenges\Basics\PrintVariableCoding
-            - Challenges\Basics\ForLoopCoding
-            - Challenges\Basics\IncorrectOpenTagsMC
+            - basics_printvariablecoding
+            - basics_forloopcoding
+            - basics_incorrectopentagsmc
     "functions-filters":
         video_key:  140192813
         challenges:
-            - Challenges\FunctionsFilters\DateFilterCoding
-            - Challenges\FunctionsFilters\RandomFunctionWithFilterCoding
-            - Challenges\FunctionsFilters\DumpFindVariableCoding
+            - functionsfilters_datefiltercoding
+            - functionsfilters_randomfunctionwithfiltercoding
+            - functionsfilters_dumpfindvariablecoding
     "objects-and-arrays":
         video_key:  140192817
         challenges:
-            - Challenges\ObjectsAndArrays\PrintRandomArrayKeyCoding
-            - Challenges\ObjectsAndArrays\PrintProductObjectsCoding
+            - objectsandarrays_printrandomarraykeycoding
+            - objectsandarrays_printproductobjectscoding
     "layout-template-inheritance":
         video_key:  140192814
         challenges:
-            - Challenges\LayoutTemplateInheritance\CreateLayoutRemoveDuplicationCoding
-            - Challenges\LayoutTemplateInheritance\FixExtendsErrorCoding
-            - Challenges\LayoutTemplateInheritance\AddBlockAndOverrideCoding
+            - layouttemplateinheritance_createlayoutremoveduplicationcoding
+            - layouttemplateinheritance_fixextendserrorcoding
+            - layouttemplateinheritance_addblockandoverridecoding
     "including-other-templates":
         video_key:  140192816
         challenges:
-            - Challenges\IncludingOtherTemplates\UseIncludeCoding
-            - Challenges\IncludingOtherTemplates\IncludeAndVariablesMC
+            - includingothertemplates_useincludecoding
+            - includingothertemplates_includeandvariablesmc
     "tests-if-statements":
         video_key:  140192815
         challenges:
-            - Challenges\TestsIfStatements\TestIfOddCoding
-            - Challenges\TestsIfStatements\ComplexTestAndNotCoding
+            - testsifstatements_testifoddcoding
+            - testsifstatements_complextestandnotcoding
     "for-loop-inline-if":
         video_key:  140192821
         challenges:
-            - Challenges\ForLoopInlineIf\ValidForLoopVariableMC
-            - Challenges\ForLoopInlineIf\ForElseCoding
-            - Challenges\ForLoopInlineIf\OneLineIfStatementCoding
-            - Challenges\ForLoopInlineIf\ForTagConditionsCoding
+            - forloopinlineif_validforloopvariablemc
+            - forloopinlineif_forelsecoding
+            - forloopinlineif_onelineifstatementcoding
+            - forloopinlineif_fortagconditionscoding
     "mistakes-macros":
         video_key:  140192820
         challenges:
-            - Challenges\MistakesMacros\IncludeMistakeCoding
-            - Challenges\MistakesMacros\BlankVariableErrorMC
-            - Challenges\MistakesMacros\SizeChartMacroCoding
+            - mistakesmacros_includemistakecoding
+            - mistakesmacros_blankvariableerrormc
+            - mistakesmacros_sizechartmacrocoding
     "extra-credit-tricks-escaping":
         video_key:  140192822
         challenges:
-            - Challenges\ExtraCreditEscaping\SideBarBlockCoding
-            - Challenges\ExtraCreditEscaping\BadTwigCodeMC
-            - Challenges\ExtraCreditEscaping\WYSIWYGFilterCoding
+            - extracreditescaping_sidebarblockcoding
+            - extracreditescaping_badtwigcodemc
+            - extracreditescaping_wysiwygfiltercoding
