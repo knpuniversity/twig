@@ -19,7 +19,8 @@ summary: |
     
     Ok, let's go!
 illustration: twig.png
-videoDownloadExtension: mov
+
+challenge_repo: knpuniversity/twig-challenges
 
 chapters:
     basics:
