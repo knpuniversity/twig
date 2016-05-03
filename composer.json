@@ -1,7 +1,6 @@
 {
     "name": "knpuniversity/php-beginner-series",
     "require": {
-        "knpuniversity/gladiator": "0.2.*"
     },
     "authors": [
         {
