@@ -65,7 +65,7 @@ Let's start by rendering a ``homepage.twig`` file and once again passing it
     // ... code that sets up Twig, and says to look for templates in template/
 
     echo $twig->render('homepage.twig', array(
-        'title' => 'Welcome to Penguins R Us!',
+        'pageTitle' => 'Welcome to Penguins R Us!',
         'products' => array(
             'Tuxedo',
             'Bow tie',
