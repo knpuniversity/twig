@@ -16,7 +16,9 @@ setup under my web server's document root and a test page called ``test.php``.
     the directions in the `README.md` file inside.
 
 Right now, this file prepares some ``pageTitle`` and ``products`` variables
-and then includes another file::
+and then includes another file:
+
+.. code-block:: php
 
     // test.php
 
@@ -59,7 +61,9 @@ Setting up Twig
 
 In a separate file, I've setup all the behind-the-scenes work to use Twig.
 Let's start by rendering a ``homepage.twig`` file and once again passing it
-``pageTitle`` and ``products`` variables::
+``pageTitle`` and ``products`` variables:
+
+.. code-block:: php
 
     // index.php
     // ... code that sets up Twig, and says to look for templates in template/
