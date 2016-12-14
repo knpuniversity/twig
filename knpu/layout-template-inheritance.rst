@@ -29,7 +29,7 @@ add ``/contact`` to the end of your URL:
 
     {# templates/contact.twig #}
 
-    <h1>{{ pageTitle }}</h1>
+    <h1>{{ pageData.title }}</h1>
 
     <p>Make some penguin noises, we're listening...</p>
 
@@ -202,7 +202,7 @@ called ``body``, since that's the name of the block in our layout:
     {% extends 'layout.twig' %}
 
     {% block body %}
-        <h1>{{ pageTitle }}</h1>
+        <h1>{{ pageData.title }}</h1>
         
         {# ... #}
     {% endblock %}
