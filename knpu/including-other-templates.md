@@ -22,8 +22,8 @@ to show that they only contain a small page fragment, not a whole page:
 </div>
 ```
 
-To include this on the homepage we can use the [include][include] function. We use
-this in a [say something][say_something_syntax] syntax because `include` renders
+To include this on the homepage we can use the [include()][include] function. We use
+this in a [say something][say_something_syntax] syntax because `include()` renders
 the other template, and we want to print its content:
 
 ```html+jinja
@@ -55,7 +55,7 @@ template:
 </div>
 ```
 
-You can also pass extra variables to the template. The [include][include] function
+You can also pass extra variables to the template. The [include()][include] function
 takes two arguments: the name of the template to include and a collection
 of additional variables to pass. These variables are a key-value list of names
 and their values.

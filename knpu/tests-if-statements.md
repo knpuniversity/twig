@@ -2,8 +2,8 @@
 
 But when we try the contact page, it blows up
 
-> Uncaught exception 'Twig_Error_Runtime' with message 'Variable
-> "backgroundColor" does not exist in "_banner.twig" at line 5'
+> Uncaught exception `Twig_Error_Runtime` with message "Variable
+> `backgroundColor` does not exist in `_banner.twig` at line 5"
 
 We're not passing a `backgroundColor` in the `include` call in `contact.twig`,
 so Twig gets angry! We can of course pass this variable to the template.

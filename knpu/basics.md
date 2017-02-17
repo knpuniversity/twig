@@ -43,7 +43,7 @@ variables:
 <!-- templates/homepage.php -->
 
 <!-- ... the rest of the HTML page ... -->
-<?php foreach ($products as $product): ?>
+<?php foreach ($products as $product) : ?>
     <div class="span4">
         <h2><?php echo $product->getName() ?></h2>
         <!-- ... -->
@@ -115,13 +115,13 @@ sign, then two closing curly braces:
 When we refresh the page, it works! We've just written our first line of Twig!
 Whenever you want to print something, just open Twig with two curly braces,
 write the variable name, then close Twig. We'll get fancier in a little while
-with some things called :ref:`functions<twig-functions>` and :ref:`filters<twig-filters>`,
+with some things called [functions][twig_functions] and [filters][twig_filters],
 but this is the most fundamental syntax in Twig.
 
 ## Looping over Variables
 
 Next, the `products` variable is an array that we need to loop through.
-Twig comes with a `for`_ tag that is able to loop through items just like
+Twig comes with a [for][for] tag that is able to loop through items just like
 PHP's `foreach`.
 
 Remember that anything we type here will be printed out raw on the page until
@@ -186,7 +186,7 @@ how you "speak" in Twig.
 ### The "Do Something" Syntax: `{% ... %}`
 
 The curly-percent (`{%`) is the other syntax, which I call the "do something"
-syntax. It's used for things like `if`_ and `for`_ tags as well as other things
+syntax. It's used for things like [if][if] and [for][for] tags as well as other things
 that "do" something. The `{%` is really easy because there are only
 a handful of things that can be used inside of it. If you go to Twig's website
 click [Documentation][documentation], and scroll down, you can see a full list of everything
@@ -241,3 +241,5 @@ of your file, which we'll talk about later.
 [twig_control_whitespace]: https://knpuniversity.com/screencast/twig/extra-credit-tricks-escaping#twig-control-whitespace
 [say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-say-something-syntax
 [do_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-do-something-syntax
+[twig_functions]: https://knpuniversity.com/screencast/twig/functions-filters#twig-functions
+[twig_filters]: https://knpuniversity.com/screencast/twig/functions-filters#twig-filters

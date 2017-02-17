@@ -25,7 +25,7 @@ When we refresh, Twig yells at us!
 
 > A hash key must be a quoted string, a number, a name, or an expression
 > enclosed in parentheses (unexpected token "punctuation" of value "{" in
-> "homepage.twig" at line 10'
+> `homepage.twig` at line 10'
 
 We now know that you open up Twig just once using `{{` or `{%` and then
 you can write inside of it. What's tricky about this error message is the
@@ -55,7 +55,7 @@ echo $twig->render('homepage.twig', array(
 
 When we try to print the `name` on it, we get a strange error.
 
-> Item "name" for "" does not exist in "homepage.twig" at line 23
+> Item `name` for "" does not exist in `homepage.twig` at line 23
 
 What it really means is that `featureProduct` is blank, so you can't try
 to get its name of course! The empty double-quotes is a bit deceiving, but

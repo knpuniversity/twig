@@ -27,7 +27,7 @@ Is it possible to *only* add the extra text if the `title` block is overridden?
 
 The secret is the [block][block] function, which you can use to return the content
 of a block at any time. Replace the traditional `{% block title %}` and
-instead use the `block()` function in a :ref:`say something<twig-say-something-syntax>`
+instead use the `block()` function in a [say something][twig_say_something_syntax]
 tag:
 
 ```html+jinja
@@ -61,7 +61,7 @@ custom things.
 ## The Short block Syntax
 
 And while we're on this topic, we can make the `title` block even shorter
-in `homepage.twig]:
+in `homepage.twig`:
 
 ```jinja
 {% block title 'Start looking fly!' %}
@@ -85,8 +85,6 @@ is with the `~` character, which concatenates strings in Twig.
 ```
 
 You won't see this too often, but it'll come in handy when you need it.
-
-.. _twig-control-whitespace:
 
 ## Whitespace Control
 
@@ -142,7 +140,7 @@ all print right next to each other on one line:
 
 Let's see one more common trick that may look strange when you first see
 it. Look back in the `banner.twig` template where we used the
-:ref:`single-line if syntax<twig-inline-if-syntax>`. Actually, there's an
+[single-line if syntax][twig_inline_if_syntax]. Actually, there's an
 easier way to do this by using the [default][default] filter:
 
 ```html+jinja
@@ -157,15 +155,15 @@ someone is using a variable that may or may not be defined.
 ***TIP
 Depending on your settings, Twig may just fail silently if you reference
 an undefined variable.
-```
+***
 
 ## Escaping
 
 Ok, one last thing - HTML escaping! Whenever you render content that may
 have been filled in by the user, you need to escape it. This prevents people
 from writing HTML tags that you don't want or, worse, JavaScript code that
-could be used for [cross-site scripting][cross_site_scripting] attacks. That's scarier than a
-hungry pack of leopard seals!
+could be used for [cross-site scripting][cross_site_scripting] attacks.
+That's scarier than a hungry pack of leopard seals!
 
 Let's try this out by adding some HTML markup to our page summary:
 
@@ -211,7 +209,8 @@ escaped.
 Well hello Twig expert! Our time talking about Twig is coming to an end, but the
 good news is that you have all the tools you need to be successful and your
 penguins are looking dapper. Remember that all the tags, functions, filters and
-tests that are available in Twig can be found on the bottom of its [documentation page][documentation_page].
+tests that are available in Twig can be found on the bottom of its
+[documentation page][documentation_page].
 
 Also remember that in your project, you may have even more tags, functions,
 filters or tests that are specific to you. Your challenge from here is to
@@ -227,3 +226,5 @@ Good luck, and seeya next time!
 [raw]: http://twig.sensiolabs.org/doc/filters/raw.html
 [documentation_page]: http://twig.sensiolabs.org/documentation
 [block]: http://twig.sensiolabs.org/doc/functions/block.html
+[twig_inline_if_syntax]: https://knpuniversity.com/screencast/twig/for-loop-inline-if#twig-inline-if-syntax
+[twig_say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-say-something-syntax

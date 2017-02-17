@@ -144,7 +144,7 @@ block. Even the names `title` and `body` aren't special. If we rename
 templates.
 
 > If you want to *add* to the content of the parent block instead of completely
-> replacing it, use the `parent`_ function:
+> replacing it, use the [parent()][parent] function:
 >
 > ```html+jinja
 > {% block title %}
@@ -171,8 +171,8 @@ Where should this text be placed in the layout?
 
 When we refresh, we see a nasty error:
 
-> Uncaught exception 'Twig_Error_Syntax' with message 'A template that extends
-> another one cannot have a body in "homepage.twig" at line 4.'
+> Uncaught exception `Twig_Error_Syntax` with message "A template that extends
+> another one cannot have a body in `homepage.twig` at line 4."
 
 Twig knows that we want it to take the content from the `body` tag of homepage
 and put it where the `body` tag is in the layout. But when it sees this

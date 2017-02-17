@@ -5,7 +5,7 @@ right now because they're floating but not breaking correctly. To fix this,
 we need to wrap every three products in their very own `row` div.
 
 To do this, we can use a [divisibleby][divisibleby] test to see if the item number
-we're on is divisible by three.
+we're on is divisible by three:
 
 ```html+jinja
 <div class="row">
@@ -102,8 +102,6 @@ add an `else` tag inside of the `for` loop.
 
 If `products` is empty, it skips the `for` loop and calls the `else`
 section instead. When we try it, it still works great.
-
-.. _twig-inline-if-syntax:
 
 ## The inline if Syntax
 
