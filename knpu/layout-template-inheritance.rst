@@ -8,7 +8,7 @@ enough, let's add these.
 To add the layout, there's nothing technically wrong with including it right
 in `homepage.twig`. This is perfectly straightforward and has nothing to
 do with Twig. But let's setup a second page: `/contact`. I'll tweak our
-setup script to make this work::
+setup script to make this work:
 
 ```php
 // index.php

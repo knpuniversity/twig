@@ -118,7 +118,7 @@ function, which accepts all sorts of interesting strings as valid dates.
 The Twig [date][date] filter takes that string and renders it in the new format that
 we want. Of course, we can also send a variable through the date filter.
 Let's pass in a `saleEndsAt` variable into the template and render it the
-same way::
+same way:
 
 ```php
 // index.php

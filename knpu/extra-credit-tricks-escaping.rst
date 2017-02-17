@@ -167,7 +167,7 @@ from writing HTML tags that you don't want or, worse, JavaScript code that
 could be used for [cross-site scripting][cross_site_scripting] attacks. That's scarier than a
 hungry pack of leopard seals!
 
-Let's try this out by adding some HTML markup to our page summary::
+Let's try this out by adding some HTML markup to our page summary:
 
 ```php
 // index.php
