@@ -173,8 +173,8 @@ an array or collection. This may not seem like much, but you've already seen
 pretty much all of Twig's syntaxes! To start writing Twig code in your HTML,
 there are only two different syntaxes:
 
-* `{{     }}` The "say something" syntax
-* `{%     %}` The "do something" syntax
+* `{{     }}` [The "say something" syntax][say_something_syntax]
+* `{%     %}` [The "do something" syntax][do_something_syntax]
 
 ### The "Say Something" Syntax: `{{ ... }}`
 
@@ -239,4 +239,5 @@ of your file, which we'll talk about later.
 [if]: http://twig.sensiolabs.org/doc/tags/if.html
 [documentation]: http://twig.sensiolabs.org/documentation
 [twig_control_whitespace]: https://knpuniversity.com/screencast/twig/extra-credit-tricks-escaping#twig-control-whitespace
-g
+[say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-say-something-syntax
+[do_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-do-something-syntax
