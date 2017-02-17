@@ -1,193 +1,185 @@
-Extra Credit Tricks and HTML Escaping
-=====================================
+# Extra Credit Tricks and HTML Escaping
 
 You're a pro now, so let's have a little fun and see some sweet tricks!
 
-Expert Control of Blocks with the block Function
-------------------------------------------------
+## Expert Control of Blocks with the block Function
 
 We've learned a lot about template inheritance and blocks. Now, let's make
-things a bit more interesting. We created a ``title`` block in our layout
-so that individual pages could control the page title. If a page has a ``title``
-block, it replaces the page title entirely. If it has *no* ``title`` block,
+things a bit more interesting. We created a `title` block in our layout
+so that individual pages could control the page title. If a page has a `title`
+block, it replaces the page title entirely. If it has *no* `title` block,
 then the default title is used.
 
-Let me change the ``title`` block to be a little more interesting:
+Let me change the `title` block to be a little more interesting:
 
-.. code-block:: html+jinja
-
-    <title>
-        {% block title %}
-            Penguins Pants Plus! Your source for fancy penguin suits
-        {% endblock %} | Penguins Pants Plus!
-    </title>
+```html+jinja
+<title>
+    {% block title %}
+        Penguins Pants Plus! Your source for fancy penguin suits
+    {% endblock %} | Penguins Pants Plus!
+</title>
+```
 
 My goal is to suffix the page title with "Penguins Pants Plus!" so that all
 of our pages are consistent. The only funny thing here, besides penguin pants,
-is that if the ``title`` block isn't overridden, the suffix is a little redundant.
-Is it possible to *only* add the extra text if the ``title`` block is overridden?
+is that if the `title` block isn't overridden, the suffix is a little redundant.
+Is it possible to *only* add the extra text if the `title` block is overridden?
 
-The secret is the `block`_ function, which you can use to return the content
-of a block at any time. Replace the traditional ``{% block title %}`` and
-instead use the ``block()`` function in a :ref:`say something<twig-say-something-syntax>`
+The secret is the [block][block] function, which you can use to return the content
+of a block at any time. Replace the traditional `{% block title %}` and
+instead use the `block()` function in a :ref:`say something<twig-say-something-syntax>`
 tag:
 
-.. code-block:: html+jinja
+```html+jinja
+{{ block('title') }} | Penguins Pants Plus!
+```
 
+When we refresh, this works like before: the `block` function prints out
+the content from the `title` block. The only thing we're missing is the
+default page title if the `title` block isn't set.
+
+Now that we know about this `block` function, we can do that easily with
+an `if` statement:
+
+```html+jinja
+{% if block('title') %}
     {{ block('title') }} | Penguins Pants Plus!
+{% else %}
+    Penguins Pants Plus! Your source for fancy penguin suits
+{% endif %}
+```
 
-When we refresh, this works like before: the ``block`` function prints out
-the content from the ``title`` block. The only thing we're missing is the
-default page title if the ``title`` block isn't set.
-
-Now that we know about this ``block`` function, we can do that easily with
-an ``if`` statement:
-
-.. code-block:: html+jinja
-
-    {% if block('title') %}
-        {{ block('title') }} | Penguins Pants Plus!
-    {% else %}
-        Penguins Pants Plus! Your source for fancy penguin suits
-    {% endif %}
-
-Success! When we override the ``title`` block on the homepage, we get the
+Success! When we override the `title` block on the homepage, we get the
 suffix added. But on the contact page, we just get the default page title.
 I try to use blocks in their traditional fashion as often as possible. But
-when things get more complicated, use the ``block`` function to do some really
+when things get more complicated, use the `block` function to do some really
 custom things.
 
-.. tip::
+> To get really advanced, you can import blocks from other templates and
+> use them in this way. See the [use tag][use_tag] for more details.
 
-    To get really advanced, you can import blocks from other templates and
-    use them in this way. See the `use tag`_ for more details.
+## The Short block Syntax
 
-The Short block Syntax
-----------------------
+And while we're on this topic, we can make the `title` block even shorter
+in `homepage.twig]:
 
-And while we're on this topic, we can make the ``title`` block even shorter
-in ``homepage.twig``:
-
-.. code-block:: jinja
-
-    {% block title 'Start looking fly!' %}
+```jinja
+{% block title 'Start looking fly!' %}
+```
 
 You're free to choose whatever format you want, but if your block is just
 a simple string, you'll often see this version used.
 
-Concatenating Strings
----------------------
+## Concatenating Strings
 
 One apparent drawback to this is that you can't mix static text and
 variables like you could before by just writing some text and then using
 the "say something" syntax.
 
-For example, suppose we wanted to include the ``pageData.title`` variable
+For example, suppose we wanted to include the `pageData.title` variable
 in the page title. How can we combine it with the static text? The answer
-is with the ``~`` character, which concatenates strings in Twig.
+is with the `~` character, which concatenates strings in Twig.
 
-.. code-block:: jinja
-
-    {% block title 'Start looking fly! '~pageData.title %}
+```jinja
+{% block title 'Start looking fly! '~pageData.title %}
+```
 
 You won't see this too often, but it'll come in handy when you need it.
 
 .. _twig-control-whitespace:
 
-Whitespace Control
-------------------
+## Whitespace Control
 
 Normally, the whitespace you put in a Twig file is left completely alone. We can
 see this when we view the source. In fact, we have some extra space around
-the ``title`` tag because of the new trick we're using in Twig. Let's see
+the `title` tag because of the new trick we're using in Twig. Let's see
 if we can get rid of it!
 
-On any twig starting or ending tag, you can add a minus sign (``-``):
+On any twig starting or ending tag, you can add a minus sign (`-`):
 
-.. code-block:: html+jinja
-
-    <title>
-        {%- if block('title') %}
-            {{ block('title') }} | Penguins Pants Plus!
-        {% else %}
-            Penguins Pants Plus! Your source for fancy penguin suits
-        {% endif %}
-    </title>
+```html+jinja
+<title>
+    {%- if block('title') %}
+        {{ block('title') }} | Penguins Pants Plus!
+    {% else %}
+        Penguins Pants Plus! Your source for fancy penguin suits
+    {% endif %}
+</title>
+```
 
 This tells Twig to trim all the whitespace to the left of that tag until
 it hits a non-whitespace character. When we view the source, we can see a
 slightly smaller amount of whitespace. If we add enough of these, we'll see
 all the extra space disappear:
 
-.. code-block:: html+jinja
+```html+jinja
+<title>
+    {%- if block('title') -%}
+        {{- block('title') -}} | Penguins Pants Plus!
+    {%- else -%}
+        Penguins Pants Plus! Your source for fancy penguin suits
+    {%- endif -%}
+</title>
+```
 
-    <title>
-        {%- if block('title') -%}
-            {{- block('title') -}} | Penguins Pants Plus!
-        {%- else -%}
-            Penguins Pants Plus! Your source for fancy penguin suits
-        {%- endif -%}
-    </title>
+### The spaceless Tag
 
-The spaceless Tag
-~~~~~~~~~~~~~~~~~
-
-Another way to control whitespace is with the `spaceless`_ tag. The point
+Another way to control whitespace is with the [spaceless][spaceless] tag. The point
 of this tag is a little different: it removes all whitespace between HTML
 tags, without affecting space inside an HTML tag or inside static text. If
 we surround the meta tags with this and refresh, we'll see those meta tags
 all print right next to each other on one line:
 
-.. code-block:: html+jinja
+```html+jinja
+{% spaceless %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+{% endspaceless %}
+```
 
-    {% spaceless %}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    {% endspaceless %}
-
-Using Undefined Variables with the default Filter
--------------------------------------------------
+## Using Undefined Variables with the default Filter
 
 Let's see one more common trick that may look strange when you first see
-it. Look back in the ``banner.twig`` template where we used the
+it. Look back in the `banner.twig` template where we used the
 :ref:`single-line if syntax<twig-inline-if-syntax>`. Actually, there's an
-easier way to do this by using the `default`_ filter:
+easier way to do this by using the [default][default] filter:
 
-.. code-block:: html+jinja
-
-    <div class="well" style="background-color: {{ backgroundColor|default('lightblue') }};">
+```html+jinja
+<div class="well" style="background-color: {{ backgroundColor|default('lightblue') }};">
+```
 
 Normally, if you reference an undefined variable in Twig, it blows up! But
-when you use the ``default`` filter, it avoids that error and instead, returns
-the default value ``lightblue``. You may see this trick quite often when
+when you use the `default` filter, it avoids that error and instead, returns
+the default value `lightblue`. You may see this trick quite often when
 someone is using a variable that may or may not be defined.
 
-.. tip::
+***TIP
+Depending on your settings, Twig may just fail silently if you reference
+an undefined variable.
+```
 
-    Depending on your settings, Twig may just fail silently if you reference
-    an undefined variable.
-
-Escaping
---------
+## Escaping
 
 Ok, one last thing - HTML escaping! Whenever you render content that may
 have been filled in by the user, you need to escape it. This prevents people
 from writing HTML tags that you don't want or, worse, JavaScript code that
-could be used for `cross-site scripting`_ attacks. That's scarier than a
+could be used for [cross-site scripting][cross_site_scripting] attacks. That's scarier than a
 hungry pack of leopard seals!
 
 Let's try this out by adding some HTML markup to our page summary::
 
-    // index.php
-    // ...
+```php
+// index.php
+// ...
 
-    echo $twig->render('homepage.twig', array(
-        'pageData' => array(
-            'summary'   => "You're <strong>hip</strong>, you're cool ...",
-        ),
-        // ...
-    ));
+echo $twig->render('homepage.twig', array(
+    'pageData' => array(
+        'summary'   => "You're <strong>hip</strong>, you're cool ...",
+    ),
+    // ...
+));
+```
 
 When we refresh, Twig is automatically escaping these characters and printing them
 out safely. Actually, whether or not Twig automatically does this depends
@@ -195,32 +187,31 @@ on how it's setup. In your case, try this out and see if Twig is escaping
 or not escaping automatically. You can try this easily by printing out a
 static string and seeing what happens.
 
-.. code-block:: jinja
-
-    {{ '<strong>hallo</strong>'|upper }}
+```jinja
+{{ '<strong>hallo</strong>'|upper }}
+```
 
 In some cases, you may *need* to actually print out some content unescaped.
-To do this, just use the handy `raw`_ filter:
+To do this, just use the handy [raw][raw] filter:
 
-.. code-block:: html+jinja
+```html+jinja
+<p>
+    {{ pageData.summary|raw }}
+</p>
+```
 
-    <p>
-        {{ pageData.summary|raw }}
-    </p>
+***TIP
+If automatic escaping is *off*, then you need to be quite careful and
+use the [escape][escape] filter on any strings you print out to make sure they are
+escaped.
+***
 
-.. tip::
-
-    If automatic escaping is *off*, then you need to be quite careful and
-    use the `escape`_ filter on any strings you print out to make sure they are
-    escaped.
-
-Happy Trails
-------------
+## Happy Trails
 
 Well hello Twig expert! Our time talking about Twig is coming to an end, but the
 good news is that you have all the tools you need to be successful and your
 penguins are looking dapper. Remember that all the tags, functions, filters and
-tests that are available in Twig can be found on the bottom of its `documentation page`_.
+tests that are available in Twig can be found on the bottom of its [documentation page][documentation_page].
 
 Also remember that in your project, you may have even more tags, functions,
 filters or tests that are specific to you. Your challenge from here is to
@@ -228,12 +219,11 @@ find out what those are and what secrets each holds.
 
 Good luck, and seeya next time!
 
-.. _`use tag`: http://twig.sensiolabs.org/doc/tags/use.html
-.. _`spaceless`: http://twig.sensiolabs.org/doc/tags/spaceless.html
-.. _`default`: http://twig.sensiolabs.org/doc/filters/default.html
-.. _`cross-site scripting`: https://en.wikipedia.org/wiki/Cross-site_scripting
-.. _`escape`: http://twig.sensiolabs.org/doc/filters/escape.html
-.. _`raw`: http://twig.sensiolabs.org/doc/filters/raw.html
-.. _`verbatim`: http://twig.sensiolabs.org/doc/tags/verbatim.html
-.. _`documentation page`: http://twig.sensiolabs.org/documentation
-.. _`block`: http://twig.sensiolabs.org/doc/functions/block.html
+[use_tag]: http://twig.sensiolabs.org/doc/tags/use.html
+[spaceless]: http://twig.sensiolabs.org/doc/tags/spaceless.html
+[default]: http://twig.sensiolabs.org/doc/filters/default.html
+[cross_site_scripting]: https://en.wikipedia.org/wiki/Cross-site_scripting
+[escape]: http://twig.sensiolabs.org/doc/filters/escape.html
+[raw]: http://twig.sensiolabs.org/doc/filters/raw.html
+[documentation_page]: http://twig.sensiolabs.org/documentation
+[block]: http://twig.sensiolabs.org/doc/functions/block.html
