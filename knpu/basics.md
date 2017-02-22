@@ -238,8 +238,8 @@ of your file, which we'll talk about later.
 [for]: http://twig.sensiolabs.org/doc/tags/for.html
 [if]: http://twig.sensiolabs.org/doc/tags/if.html
 [documentation]: http://twig.sensiolabs.org/documentation
-[twig_control_whitespace]: https://knpuniversity.com/screencast/twig/extra-credit-tricks-escaping#twig-control-whitespace
-[say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-say-something-syntax
-[do_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-do-something-syntax
-[twig_functions]: https://knpuniversity.com/screencast/twig/functions-filters#twig-functions
-[twig_filters]: https://knpuniversity.com/screencast/twig/functions-filters#twig-filters
+[twig_control_whitespace]: https://knpuniversity.com/screencast/twig/extra-credit-tricks-escaping#whitespace-control
+[say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#the-say-something-syntax-code-code
+[do_something_syntax]: https://knpuniversity.com/screencast/twig/basics#the-do-something-syntax-code-code
+[twig_functions]: https://knpuniversity.com/screencast/twig/functions-filters#using-a-function
+[twig_filters]: https://knpuniversity.com/screencast/twig/functions-filters#using-filters

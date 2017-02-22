@@ -88,4 +88,4 @@ When we refresh, we see a beautiful purple background.
 
 [krill]: http://www.seaworld.org/infobooks/penguins/diet.html
 [include]: http://twig.sensiolabs.org/doc/functions/include.html
-[say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-say-something-syntax
+[say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#the-say-something-syntax-code-code

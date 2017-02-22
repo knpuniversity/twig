@@ -227,4 +227,4 @@ Good luck, and seeya next time!
 [documentation_page]: http://twig.sensiolabs.org/documentation
 [block]: http://twig.sensiolabs.org/doc/functions/block.html
 [twig_inline_if_syntax]: https://knpuniversity.com/screencast/twig/for-loop-inline-if#twig-inline-if-syntax
-[twig_say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-say-something-syntax
+[twig_say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#the-say-something-syntax-code-code

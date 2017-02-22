@@ -26,7 +26,7 @@ the "say something" syntax:
 You can also use a function inside a "do something" tag, like checking to
 see if the random number is less than 5:
 
-```html+jinja
+```twig
 {# templates/homepage.twig #}
 
 <div class="price">
@@ -184,5 +184,5 @@ out some of the things we've done so that our page makes a bit more sense.
 [date_and_time]: http://www.phptherightway.com/#date_and_time
 [dump]: http://twig.sensiolabs.org/doc/functions/dump.html
 [strtotime]: http://php.net/strtotime
-[say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-say-something-syntax
-[do_something_syntax]: https://knpuniversity.com/screencast/twig/basics#twig-do-something-syntax
+[say_something_syntax]: https://knpuniversity.com/screencast/twig/basics#the-say-something-syntax-code-code
+[do_something_syntax]: https://knpuniversity.com/screencast/twig/basics#the-do-something-syntax-code-code
