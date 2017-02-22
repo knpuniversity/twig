@@ -50,7 +50,7 @@ an `if` statement:
 ```
 
 ***TIP
-The ``block()`` function throws an exception since Twig 2.0 if there's
+The `block()` function throws an exception since Twig 2.0 if there's
 no block with specified name. At first, be sure that the block is defined:
 
 ```html+jinja
