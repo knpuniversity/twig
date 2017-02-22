@@ -39,7 +39,7 @@ The `homepage.php` file is the actual template. It has all the HTML and
 we use `foreach` to loop through them and then `echo` to print out some
 variables:
 
-```php
+```html+php
 <!-- templates/homepage.php -->
 
 <!-- ... the rest of the HTML page ... -->
