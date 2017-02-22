@@ -49,6 +49,19 @@ an `if` statement:
 {% endif %}
 ```
 
+***TIP
+The `block()` function throws an exception since Twig 2.0 if there's
+no block with specified name. At first, be sure that the block is defined:
+
+```html+jinja
+{% if block('title') is defined %}
+    {{ block('title') }} | Penguins Pants Plus!
+{% else %}
+    Penguins Pants Plus! Your source for fancy penguin suits
+{% endif %}
+```
+***
+
 Success! When we override the `title` block on the homepage, we get the
 suffix added. But on the contact page, we just get the default page title.
 I try to use blocks in their traditional fashion as often as possible. But
