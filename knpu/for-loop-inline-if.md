@@ -4,7 +4,7 @@ Let's give ourselves a challenge! Our products are printing out a bit weird
 right now because they're floating but not breaking correctly. To fix this,
 we need to wrap every three products in their very own `row` div.
 
-To do this, we can use a [divisibleby][divisibleby] test to see if the item number
+To do this, we can use a [divisible_by()][divisible_by] test to see if the item number
 we're on is divisible by three:
 
 ```html+jinja
@@ -14,7 +14,7 @@ we're on is divisible by three:
             {# ... #}
         </div>
 
-        {% if loopNumber is divisibleby(3) %}
+        {% if loopNumber is divisible by(3) %}
             </div><div class="row">
         {% endif %}
     {% endfor %}
@@ -36,7 +36,7 @@ Twig comes to the rescue here and lets us say `loop.index`.
 {% for product in products %}
     {# ... #}
 
-    {% if loop.index is divisibleby(3) %}
+    {% if loop.index is divisible by(3) %}
         </div><div class="row">
     {% endif %}
 {% endfor %}
@@ -60,7 +60,7 @@ let's *not* print a new `row` if we're on the last item:
 {% for product in products %}
     {# ... #}
 
-    {% if loop.index is divisibleby(3) and not loop.last %}
+    {% if loop.index is divisible by(3) and not loop.last %}
         </div><div class="row">
     {% endif %}
 {% endfor %}
@@ -124,4 +124,4 @@ variable `backgroundColor` is printed. If it's false, the second string
 
 [loop]: http://twig.sensiolabs.org/doc/tags/for.html#the-loop-variable
 [for]: http://twig.sensiolabs.org/doc/tags/for.html
-[divisibleby]: http://twig.sensiolabs.org/doc/tests/divisibleby.html
+[divisible_by]: http://twig.sensiolabs.org/doc/tests/divisibleby.html

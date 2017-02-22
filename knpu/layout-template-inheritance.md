@@ -143,14 +143,16 @@ block. Even the names `title` and `body` aren't special. If we rename
 `body` to `content`, we just need to also rename the block in any other
 templates.
 
-> If you want to *add* to the content of the parent block instead of completely
-> replacing it, use the [parent()][parent] function:
->
-> ```html+jinja
-> {% block title %}
->     Contact us | {{ parent() }}
-> {% endblock %}
-> ```
+***TIP
+If you want to *add* to the content of the parent block instead of completely
+replacing it, use the [parent()][parent] function:
+
+```html+jinja
+{% block title %}
+    Contact us | {{ parent() }}
+{% endblock %}
+```
+***
 
 ### Common Mistake: Content outside of a Block
 

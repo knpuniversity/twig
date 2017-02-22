@@ -32,7 +32,7 @@ you can write inside of it. What's tricky about this error message is the
 "a hash key must be a quoted string" part. What the heck is a hash key?
 
 Remember [from earlier][twig_include_hash_variables] that when we used
-the [include][include] function, we passed it a collection, or *hash* of variable
+the [include()][include] function, we passed it a collection, or *hash* of variable
 names and values. Whenever you're already inside Twig and you write a `{`
 character, Twig thinks this is a hash. That's only really important because
 I want you to be able to recognize that when you see a Twig error containing
@@ -114,7 +114,7 @@ to make is to print out the `emptyMessage` variable:
             </div>
         </div>
 
-        {% if loop.index is divisibleby(3) and not loop.last %}
+        {% if loop.index is divisible by(3) and not loop.last %}
             </div><div class="row">
         {% endif %}
     {% else %}
@@ -150,12 +150,12 @@ out the featured products is very easy:
 ```
 
 Macros can be a huge tool when you're building some reusable functionality.
-In some ways, using a macro is similar to using the [include][include] function. Both
+In some ways, using a macro is similar to using the [include()][include] function. Both
 allow you to move markup and logic into a separate place and then use it.
 The biggest advantage of a macro is that it's very clear what variables you
 need to pass to it.
 
-But like with the [include][include] function, macros can also live in totally different
+But like with the [include()][include] function, macros can also live in totally different
 files. Let's create a new `macros.twig` file and move it there:
 
 ```html+jinja
@@ -176,7 +176,7 @@ as `myMacros`:
 {% import 'macros.twig' as myMacros %}
 ```
 
-To use it, just change `_self` to `myMacros`
+To use it, just change `_self` to `myMacros`:
 
 ```html+jinja
 <div class="row">
@@ -199,5 +199,5 @@ When we say `_self`, it's a way of referring to this very template.
 ***
 
 [include]: http://twig.sensiolabs.org/doc/functions/include.html
-[twig_error_content_block]: https://knpuniversity.com/screencast/twig/layout-template-inheritance#twig-error-content-block
-[twig_include_hash_variables]: https://knpuniversity.com/screencast/twig/including-other-templates#twig-include-hash-variables
+[twig_error_content_block]: https://knpuniversity.com/screencast/twig/layout-template-inheritance#common-mistake-content-outside-of-a-block
+[twig_include_hash_variables]: https://knpuniversity.com/screencast/twig/including-other-templates#passing-variables

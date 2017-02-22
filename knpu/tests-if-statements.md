@@ -48,8 +48,10 @@ by a word like [defined][defined], [even][even], [odd][odd], [empty][empty] or s
 other words. These are called tests, and they're listed once again right
 back on the main Documentation page of the Twig website.
 
-> A list of all of the operators (e.g. `/`, `*`, `==`, etc) can be
-> found on the [Twig Documentation][twig_documentation].
+***SEEALSO
+A list of all of the operators (e.g. `/`, `*`, `==`, etc) can be found on
+the [Twig Documentation][twig_documentation].
+***
 
 For example, instead of using the `length` filter and seeing if the number
 of items in the `products` collection is zero, we could say `if products is empty`:

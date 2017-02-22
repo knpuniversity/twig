@@ -155,7 +155,7 @@ you use when referring to static images, CSS or JS files. Check your
 documentation to see.
 ***
 
-Alright! By using the `dump` function, we can see what a variable looks
+Alright! By using the `dump()` function, we can see what a variable looks
 like. We can print it, loop over it, or print a child key or property for
 it. We're dangerous like a killer whale!
 

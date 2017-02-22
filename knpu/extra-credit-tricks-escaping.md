@@ -55,8 +55,10 @@ I try to use blocks in their traditional fashion as often as possible. But
 when things get more complicated, use the `block` function to do some really
 custom things.
 
-> To get really advanced, you can import blocks from other templates and
-> use them in this way. See the [use tag][use_tag] for more details.
+***SEEALSO
+To get really advanced, you can import blocks from other templates and
+use them in this way. See the [use][use_tag] tag for more details.
+***
 
 ## The Short block Syntax
 
