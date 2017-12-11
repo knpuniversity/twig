@@ -4,7 +4,7 @@ Let's give ourselves a challenge! Our products are printing out a bit weird
 right now because they're floating but not breaking correctly. To fix this,
 we need to wrap every three products in their very own `row` div.
 
-To do this, we can use a [divisible_by()][divisible_by] test to see if the item number
+To do this, we can use a [divisible by()][divisible_by] test to see if the item number
 we're on is divisible by three:
 
 ```html+jinja
