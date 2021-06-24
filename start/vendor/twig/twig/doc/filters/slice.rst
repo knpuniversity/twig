@@ -2,46 +2,47 @@
 ===========
 
 .. versionadded:: 1.6
-    The slice filter was added in Twig 1.6.
+
+    The ``slice`` filter was added in Twig 1.6.
 
 The ``slice`` filter extracts a slice of a sequence, a mapping, or a string:
 
-.. code-block:: jinja
+.. code-block:: twig
 
-    {% for i in [1, 2, 3, 4]|slice(1, 2) %}
+    {% for i in [1, 2, 3, 4, 5]|slice(1, 2) %}
         {# will iterate over 2 and 3 #}
     {% endfor %}
 
-    {{ '1234'|slice(1, 2) }}
+    {{ '12345'|slice(1, 2) }}
 
     {# outputs 23 #}
 
 You can use any valid expression for both the start and the length:
 
-.. code-block:: jinja
+.. code-block:: twig
 
-    {% for i in [1, 2, 3, 4]|slice(start, length) %}
+    {% for i in [1, 2, 3, 4, 5]|slice(start, length) %}
         {# ... #}
     {% endfor %}
 
 As syntactic sugar, you can also use the ``[]`` notation:
 
-.. code-block:: jinja
+.. code-block:: twig
 
-    {% for i in [1, 2, 3, 4][start:length] %}
+    {% for i in [1, 2, 3, 4, 5][start:length] %}
         {# ... #}
     {% endfor %}
 
-    {{ '1234'[1:2] }}
+    {{ '12345'[1:2] }} {# will display "23" #}
 
     {# you can omit the first argument -- which is the same as 0 #}
-    {{ '1234'[:2] }} {# will display "12" #}
+    {{ '12345'[:2] }} {# will display "12" #}
 
     {# you can omit the last argument -- which will select everything till the end #}
-    {{ '1234'[2:] }} {# will display "34 #}
+    {{ '12345'[2:] }} {# will display "345" #}
 
 The ``slice`` filter works as the `array_slice`_ PHP function for arrays and
-`substr`_ for strings.
+`mb_substr`_ for strings with a fallback to `substr`_.
 
 If the start is non-negative, the sequence will start at that start in the
 variable. If start is negative, the sequence will start that far from the end
@@ -61,10 +62,11 @@ up until the end of the variable.
 Arguments
 ---------
 
- * ``start``:         The start of the slice
- * ``length``:        The size of the slice
- * ``preserve_keys``: Whether to preserve key or not (when the input is an array)
+* ``start``:         The start of the slice
+* ``length``:        The size of the slice
+* ``preserve_keys``: Whether to preserve key or not (when the input is an array)
 
-.. _`Traversable`: http://php.net/manual/en/class.traversable.php
-.. _`array_slice`: http://php.net/array_slice
-.. _`substr`:      http://php.net/substr
+.. _`Traversable`: https://secure.php.net/manual/en/class.traversable.php
+.. _`array_slice`: https://secure.php.net/array_slice
+.. _`mb_substr`:   https://secure.php.net/mb-substr
+.. _`substr`:      https://secure.php.net/substr

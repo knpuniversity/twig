@@ -12,6 +12,7 @@ Filters
     date_modify
     default
     escape
+    filter
     first
     format
     join
@@ -20,17 +21,21 @@ Filters
     last
     length
     lower
+    map
+    merge
     nl2br
     number_format
-    merge
-    upper
     raw
+    reduce
     replace
     reverse
+    round
     slice
     sort
+    spaceless
     split
     striptags
     title
     trim
+    upper
     url_encode

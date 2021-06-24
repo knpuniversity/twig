@@ -3,23 +3,26 @@
 /*
  * This file is part of Twig.
  *
- * (c) 2009 Fabien Potencier
+ * (c) Fabien Potencier
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
+use Twig\Environment;
+
 /**
  * Interface implemented by all compiled templates.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- * @deprecated since 1.12 (to be removed in 2.0)
+ *
+ * @deprecated since 1.12 (to be removed in 3.0)
  */
 interface Twig_TemplateInterface
 {
-    const ANY_CALL    = 'any';
-    const ARRAY_CALL  = 'array';
-    const METHOD_CALL = 'method';
+    public const ANY_CALL = 'any';
+    public const ARRAY_CALL = 'array';
+    public const METHOD_CALL = 'method';
 
     /**
      * Renders the template with the given context and returns it as string.
@@ -36,12 +39,12 @@ interface Twig_TemplateInterface
      * @param array $context An array of parameters to pass to the template
      * @param array $blocks  An array of blocks to pass to the template
      */
-    public function display(array $context, array $blocks = array());
+    public function display(array $context, array $blocks = []);
 
     /**
      * Returns the bound environment for this template.
      *
-     * @return Twig_Environment The current environment
+     * @return Environment
      */
     public function getEnvironment();
 }

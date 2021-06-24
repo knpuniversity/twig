@@ -2,15 +2,17 @@
 ==========
 
 The ``format`` filter formats a given string by replacing the placeholders
-(placeholders follows the `printf`_ notation):
+(placeholders follows the `sprintf`_ notation):
 
-.. code-block:: jinja
+.. code-block:: twig
 
     {{ "I like %s and %s."|format(foo, "bar") }}
 
-    {# returns I like foo and bar
+    {# outputs I like foo and bar
        if the foo parameter equals to the foo string. #}
 
-.. _`printf`: http://www.php.net/printf
+.. _`sprintf`: https://secure.php.net/sprintf
 
-.. seealso:: :doc:`replace<replace>`
+.. seealso::
+
+    :doc:`replace<replace>`

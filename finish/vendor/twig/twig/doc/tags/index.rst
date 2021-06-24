@@ -4,12 +4,14 @@ Tags
 .. toctree::
     :maxdepth: 1
 
+    apply
     autoescape
     block
-    filter
+    deprecated
     do
     embed
     extends
+    filter
     flush
     for
     from
@@ -22,3 +24,4 @@ Tags
     spaceless
     use
     verbatim
+    with

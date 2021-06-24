@@ -1,11 +1,15 @@
-``sameas``
-==========
+``same as``
+===========
 
-``sameas`` checks if a variable points to the same memory address than another
-variable:
+.. versionadded:: 1.14.2
 
-.. code-block:: jinja
+    The ``same as`` test was added in Twig 1.14.2 as an alias for ``sameas``.
 
-    {% if foo.attribute is sameas(false) %}
-        the foo attribute really is the ``false`` PHP value
+``same as`` checks if a variable is the same as another variable.
+This is equivalent to ``===`` in PHP:
+
+.. code-block:: twig
+
+    {% if foo.attribute is same as(false) %}
+        the foo attribute really is the 'false' PHP value
     {% endif %}
